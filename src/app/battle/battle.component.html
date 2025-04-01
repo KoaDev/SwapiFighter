@@ -1,0 +1,89 @@
+<div class="battle-container">
+  <h1>Star Wars Combat Avancé</h1>
+
+  <button (click)="startBattle()" [disabled]="loading || battleInProgress" class="battle-button">
+    {{ loading ? 'Chargement...' : battleInProgress ? 'Combat en cours' : 'Commencer un combat' }}
+  </button>
+
+  <div *ngIf="loading" class="loading-indicator">
+    <p>Chargement des personnages...</p>
+  </div>
+
+  <div *ngIf="character1 && character2" class="battle-arena">
+    <!-- Personnage 1 -->
+    <div class="character-card"
+         [class.active-turn]="currentAttacker === 'character1'"
+         [ngClass]="{
+           'attack-animation': animationClassCharacter1 === 'attack-animation',
+           'special-attack': animationClassCharacter1 === 'special-attack',
+           'burning-animation': animationClassCharacter1 === 'burning-animation',
+           'push-animation': animationClassCharacter1 === 'push-animation',
+           'blaster-animation': animationClassCharacter1 === 'blaster-animation'
+         }"
+         [style.--hole-x]="animationClassCharacter1 === 'blaster-animation' ? (holeX + '%') : null"
+         [style.--hole-y]="animationClassCharacter1 === 'blaster-animation' ? (holeY + '%') : null">
+      <div class="character-image">
+        <img [src]="'assets/img/people/' + getCharacterId(character1.url) + '.jpg'"
+             (error)="handleImageError($event)"
+             alt="{{ character1.name }}">
+      </div>
+      <h2>{{ character1.name }}</h2>
+      <div class="health-bar">
+        <div class="health-fill" [style.width.%]="character1.health"></div>
+        <span>{{ character1.health }}%</span>
+      </div>
+      <div class="attributes">
+        <p><strong>Force:</strong> {{ character1.attributes?.strength }}</p>
+        <p><strong>Agilité:</strong> {{ character1.attributes?.agility }}</p>
+        <p><strong>Intelligence:</strong> {{ character1.attributes?.intelligence }}</p>
+      </div>
+      <p><strong>Score de puissance:</strong> {{ character1.powerScore }}</p>
+    </div>
+
+    <div class="vs">VS</div>
+
+    <!-- Personnage 2 -->
+    <div class="character-card"
+         [class.active-turn]="currentAttacker === 'character2'"
+         [ngClass]="{
+           'attack-animation': animationClassCharacter2 === 'attack-animation',
+           'special-attack': animationClassCharacter2 === 'special-attack',
+           'burning-animation': animationClassCharacter2 === 'burning-animation',
+           'push-animation': animationClassCharacter2 === 'push-animation',
+           'blaster-animation': animationClassCharacter2 === 'blaster-animation'
+         }"
+         [style.--hole-x]="animationClassCharacter2 === 'blaster-animation' ? (holeX + '%') : null"
+         [style.--hole-y]="animationClassCharacter2 === 'blaster-animation' ? (holeY + '%') : null">
+      <div class="character-image">
+        <img [src]="'assets/img/people/' + getCharacterId(character2.url) + '.jpg'"
+             (error)="handleImageError($event)"
+             alt="{{ character2.name }}">
+      </div>
+      <h2>{{ character2.name }}</h2>
+      <div class="health-bar">
+        <div class="health-fill" [style.width.%]="character2.health"></div>
+        <span>{{ character2.health }}%</span>
+      </div>
+      <div class="attributes">
+        <p><strong>Force:</strong> {{ character2.attributes?.strength }}</p>
+        <p><strong>Agilité:</strong> {{ character2.attributes?.agility }}</p>
+        <p><strong>Intelligence:</strong> {{ character2.attributes?.intelligence }}</p>
+      </div>
+      <p><strong>Score de puissance:</strong> {{ character2.powerScore }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="winner" class="winner">
+    <h2>Vainqueur: {{ winner.name }} !</h2>
+    <p>Avec {{ winner.health }}% de points de vie restants</p>
+  </div>
+
+  <div class="battle-log-container">
+    <h3>Journal de combat :</h3>
+    <div class="battle-log">
+      <div *ngFor="let entry of battleLog; trackBy: trackByIndex" class="log-entry">
+        {{ entry }}
+      </div>
+    </div>
+  </div>
+</div>

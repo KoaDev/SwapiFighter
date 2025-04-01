@@ -1,0 +1,25 @@
+<div class="history-container">
+  <h2>Historique des Combats</h2>
+
+  <button (click)="clearHistory()" class="clear-button">
+    Effacer l'historique
+  </button>
+
+  <div class="history-list">
+    <div *ngFor="let battle of battleHistory" class="battle-entry">
+      <h3>{{ battle.date | date:'medium' }}</h3>
+      <p>Vainqueur: <strong>{{ battle.winner }}</strong> ({{ battle.winnerHealth }}% PV)</p>
+      <p>Participants: {{ battle.characters[0].name }} vs {{ battle.characters[1].name }}</p>
+    </div>
+  </div>
+
+  <h2>Classement des Champions</h2>
+  <div class="ranking-list">
+    <div *ngFor="let character of ranking; let i = index" class="ranking-entry">
+      <span class="rank">#{{ i + 1 }}</span>
+      <span class="name">{{ character.name }}</span>
+      <span class="wins">{{ character.wins }} victoires</span>
+      <span class="power">Score: {{ character.powerScore }}</span>
+    </div>
+  </div>
+</div>

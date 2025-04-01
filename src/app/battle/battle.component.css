@@ -1,0 +1,220 @@
+/* Styles généraux existants */
+.battle-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.battle-button {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.battle-button:disabled {
+  background-color: #777;
+  cursor: not-allowed;
+}
+
+.loading-indicator {
+  margin: 20px 0;
+  font-style: italic;
+  color: #555;
+}
+
+.battle-arena {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.character-card {
+  background: #f5f5f5;
+  padding: 15px;
+  border-radius: 10px;
+  width: 280px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.character-card.active-turn {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+}
+
+.character-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 15px;
+  border: 3px solid #333;
+}
+
+.character-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.health-bar {
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  margin: 10px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.health-fill {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.5s;
+}
+
+.health-bar span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  color: #000;
+}
+
+.attributes {
+  background-color: #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.vs {
+  font-size: 2rem;
+  font-weight: bold;
+  align-self: center;
+}
+
+.winner {
+  margin: 20px 0;
+  color: #d32f2f;
+}
+
+.battle-log-container {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.battle-log {
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: 'Courier New', monospace;
+}
+
+.log-entry {
+  padding: 5px 0;
+  border-bottom: 1px solid #333;
+}
+
+.log-entry:last-child {
+  border-bottom: none;
+}
+
+/* Animations existantes */
+@keyframes criticalHit {
+  0% { color: white; }
+  50% { color: gold; text-shadow: 0 0 5px red; }
+  100% { color: white; }
+}
+
+.critical-hit {
+  animation: criticalHit 0.5s 3;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-15px); }
+  50% { transform: translateX(15px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
+
+.attack-animation {
+  animation: shake 0.5s;
+}
+
+/* Nouvelle animation pour l'effet brûlure (Sabre Laser) */
+@keyframes burning {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.5) drop-shadow(0 0 10px orange); }
+  100% { filter: brightness(1); }
+}
+
+.burning-animation {
+  animation: burning 0.8s;
+}
+
+/* Nouvelle animation pour Force Push */
+@keyframes push {
+  0% { transform: translateX(0); }
+  30% { transform: translateX(100px); }
+  60% { transform: translateX(-100px); }
+  100% { transform: translateX(0); }
+}
+
+.push-animation {
+  animation: push 0.8s;
+}
+
+/* Nouvelle animation pour Tir de Blaster (effet "trou") */
+@keyframes blaster {
+  0% {
+    clip-path: circle(0% at var(--hole-x, 50%) var(--hole-y, 50%));
+    opacity: 1;
+    transform: scale(1);
+    filter: none;
+  }
+  25% {
+    clip-path: circle(30% at var(--hole-x, 20%) var(--hole-y, 20%));
+    opacity: 0.6;
+    transform: scale(0.95);
+    filter: blur(2px);
+  }
+  50% {
+    clip-path: circle(30% at var(--hole-x, 20%) var(--hole-y, 20%));
+    opacity: 0.3;
+    transform: scale(1.05);
+    filter: blur(4px);
+  }
+  75% {
+    clip-path: circle(30% at var(--hole-x, 20%) var(--hole-y, 20%));
+    opacity: 0.6;
+    transform: scale(0.98);
+    filter: blur(2px);
+  }
+  100% {
+    clip-path: circle(0% at var(--hole-x, 20%) var(--hole-y, 20%));
+    opacity: 1;
+    transform: scale(1);
+    filter: none;
+  }
+}
+
+
+.blaster-animation {
+  animation: blaster 0.8s;
+}
