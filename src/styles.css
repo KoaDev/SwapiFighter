@@ -1,4 +1,1171 @@
+/* battle.component.css */
+@import url('https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap');
+
 :root {
-  --hole-x: 50%;
-  --hole-y: 50%;
+  --star-wars-yellow: #FFE81F;
+  --star-wars-yellow-glow: rgba(255, 232, 31, 0.7);
+  --star-wars-black: #000000;
+  --star-wars-dark-gray: #0a0a0a;
+  --star-wars-light-gray: #222222;
+  --light-side-blue: #3a82f7;
+  --light-side-blue-glow: rgba(58, 130, 247, 0.7);
+  --dark-side-red: #e23636;
+  --dark-side-red-glow: rgba(226, 54, 54, 0.7);
+  --imperial-gray: #2d2d2d;
+  --rebel-orange: #ff5a1f;
+}
+
+@font-face {
+  font-family: 'Star Jedi';
+  src: url('https://db.onlinewebfonts.com/t/0c724f6aa457310440cf8949c615cbd7.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--star-wars-black);
+  font-family: 'Pathway Gothic One', sans-serif;
+  color: #ffffff;
+}
+
+/* Stars background animation */
+.stars, .twinkling {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+}
+
+.stars {
+  background: #000 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8yOS8xMiKqq3kAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAFBklEQVR4nO2a23LbMAxEF5LtNP//sW2dttOLKdkPGWxISRSF7QbZncGAV9XxCuyClNT7+/s7MYbzp3YAE4YKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBm+OV9oLXWbq21F8/jpmma3lprf733b5zjh85P79C8tbY0tD3vXPtprR3ixyjkiXNrrW3vEIL2Y9nfWvsbdL0HKcgZxS/gvoCrpAfJCfCNJXdE8Ys3iF9I1gXlIFSQLEbIC9oPJGUHeYOYR+AiZwdnkJDDeJsiY4s2gXs2HWj/CnIW/43FZPRSPj79cJGxRptIvUJJC2Q+CsVkgISv3vu3x3GttZfDe0bKZu7SWpskKWekW79KEsgGPUIvZPwA+UDSQc5kHUuRp7xAWIuOkX6FkmU9IomFEuGXVnMpFhFbTPrH+QcUlAQJWcO7Xq+AiJwtspwvLCKJqcgNaIKMiZh7KZGPbYWMrG1AEiJlA30DWeBz/BO+foF8BfkCssPnkUYMInFzqjxdgQPGXgI2IuULZIMPYIPPeQF5h881mPh79BuMV3C/P+CeM7gpMCVkjXa9yJlgjLCtcQghrq3k4j4hS2j0C8hLUcgCeQN5h8/LbOy8wnhHbP9wvw/wuZbrbsWniBBRiEhYoIjIJ0yVckTKBu172ReUvB3mCeQZ+uJcgN8Jcsf1exB5xYzcN+f5l+NThAzREaX7GWWGiCjpOKKki9QVcq4RIe9gPkE+QF5h3ACv4CIkUsScO3BvkXM2hRaYLGRIUWdUXEEi4gKGDJEgXZQc0XKE9gXEI+IdRMgHmG8gRTSIhA0UUXGPpRZu61Bm4uYa4ojoC7zHM4K+BvMEhgjZoIgQGeIZPh8RF+AizXLNc1AvOQTIuFRa2uKUtbRCR1d0nAsfUdIF5BVkDZMLuEQIiBhYGURIlHWUECGeMWA/cR/9xtTJOAStjCspK1rHi3pJQSJDJEjXZKzAiJAFFBFQ8gRtWd9ZoFzP4TpSPFLAnMN+A53TuF0qHQXQRRvdO+gSRcoc5nmc5GUOZYHyDF/gOlLiGgTm2MFvOUyV8lMh3vewZXlOyoxIEdEMpkSILPBxa4FuDQN2EwuZcR5bw36ajOHp6iej5RbVEPmhNLK3kq6fZ5SlfjQpw9PVT0bLPKRb9nrzujFoTVkckIemrJ/MkHu0cDsWLkUw5WGJDJPRss28Z0f8TxsQdG/CMkPu0cI9XPz9D2yPmz1wM2WekmG7Z5zR7hbSWluZQ8ZvtN3jNovcLYS6jMPuGWfcPWVRl/HQPeMMUtaGJmGTshrDVwiPjKWPeRz5CmGRsZT/CWSFMJCx1P0mfIUwyVitfYXwFsLCH4ZMJMqrECZQIfygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGZGfKL3/q4swAr39/hNmTbFhqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZ/gNURQWtOJ4VhQAAAABJRU5ErkJggg==') repeat top left;
+}
+
+.twinkling {
+  background: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8yOS8xMiKqq3kAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAFBklEQVR4nO2a23LbMAxEF5LtNP//sW2dttOLKdkPGWxISRSF7QbZncGAV9XxCuyClNT7+/s7MYbzp3YAE4YKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBm+OV9oLXWbq21F8/jpmma3lprf733b5zjh85P79C8tbY0tD3vXPtprR3ixyjkiXNrrW3vEIL2Y9nfWvsbdL0HKcgZxS/gvoCrpAfJCfCNJXdE8Ys3iF9I1gXlIFSQLEbIC9oPJGUHeYOYR+AiZwdnkJDDeJsiY4s2gXs2HWj/CnIW/43FZPRSPj79cJGxRptIvUJJC2Q+CsVkgISv3vu3x3GttZfDe0bKZu7SWpskKWekW79KEsgGPUIvZPwA+UDSQc5kHUuRp7xAWIuOkX6FkmU9IomFEuGXVnMpFhFbTPrH+QcUlAQJWcO7Xq+AiJwtspwvLCKJqcgNaIKMiZh7KZGPbYWMrG1AEiJlA30DWeBz/BO+foF8BfkCssPnkUYMInFzqjxdgQPGXgI2IuULZIMPYIPPeQF5h881mPh79BuMV3C/P+CeM7gpMCVkjXa9yJlgjLCtcQghrq3k4j4hS2j0C8hLUcgCeQN5h8/LbOy8wnhHbP9wvw/wuZbrbsWniBBRiEhYoIjIJ0yVckTKBu172ReUvB3mCeQZ+uJcgN8Jcsf1exB5xYzcN+f5l+NThAzREaX7GWWGiCjpOKKki9QVcq4RIe9gPkE+QF5h3ACv4CIkUsScO3BvkXM2hRaYLGRIUWdUXEEi4gKGDJEgXZQc0XKE9gXEI+IdRMgHmG8gRTSIhA0UUXGPpRZu61Bm4uYa4ojoC7zHM4K+BvMEhgjZoIgQGeIZPh8RF+AizXLNc1AvOQTIuFRa2uKUtbRCR1d0nAsfUdIF5BVkDZMLuEQIiBhYGURIlHWUECGeMWA/cR/9xtTJOAStjCspK1rHi3pJQSJDJEjXZKzAiJAFFBFQ8gRtWd9ZoFzP4TpSPFLAnMN+A53TuF0qHQXQRRvdO+gSRcoc5nmc5GUOZYHyDF/gOlLiGgTm2MFvOUyV8lMh3vewZXlOyoxIEdEMpkSILPBxa4FuDQN2EwuZcR5bw36ajOHp6iej5RbVEPmhNLK3kq6fZ5SlfjQpw9PVT0bLPKRb9nrzujFoTVkckIemrJ/MkHu0cDsWLkUw5WGJDJPRss28Z0f8TxsQdG/CMkPu0cI9XPz9D2yPmz1wM2WekmG7Z5zR7hbSWluZQ8ZvtN3jNovcLYS6jMPuGWfcPWVRl/HQPeMMUtaGJmGTshrDVwiPjKWPeRz5CmGRsZT/CWSFMJCx1P0mfIUwyVitfYXwFsLCH4ZMJMqrECZQIfygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGZGfKL3/q4swAr39/hNmTbFhqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZ/gNURQWtOJ4VhQAAAABJRU5ErkJggg==') repeat top left;
+  animation: twinkle 300s linear infinite;
+}
+
+@keyframes twinkle {
+  from { background-position: 0 0; }
+  to { background-position: -10000px 5000px; }
+}
+
+.battle-container {
+  margin: 20px auto;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-family: 'Pathway Gothic One', sans-serif;
+  border: 3px solid var(--star-wars-yellow);
+  box-shadow: 0 0 30px var(--star-wars-yellow-glow);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Title styling */
+.title {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  perspective: 400px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  padding-bottom: 20px;
+}
+
+.title-shadow {
+  display: block;
+  font-family: 'Star Jedi', sans-serif;
+  font-size: 3.5rem;
+  color: var(--star-wars-yellow);
+  text-shadow: 0 0 15px var(--star-wars-yellow-glow);
+}
+
+.title-main {
+  display: block;
+  font-family: 'Star Jedi', sans-serif;
+  font-size: 2rem;
+  color: var(--star-wars-yellow);
+  transform: translateY(-10px);
+  text-shadow: 0 0 10px var(--star-wars-yellow-glow);
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--star-wars-yellow), transparent);
+  border-radius: 2px;
+}
+
+/* Button styling */
+.battle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 40px;
+  padding: 14px 30px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: var(--star-wars-yellow);
+  border: 2px solid var(--star-wars-yellow);
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px var(--star-wars-yellow-glow);
+}
+
+.battle-button:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--star-wars-yellow-glow);
+}
+
+/* Continuation du CSS */
+
+.battle-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button-text {
+  position: relative;
+  z-index: 2;
+}
+
+.lightsaber-hilt {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 3px;
+  background: linear-gradient(90deg,
+  transparent 0%,
+  var(--star-wars-yellow) 20%,
+  var(--star-wars-yellow) 80%,
+  transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.battle-button:hover:not(:disabled) .lightsaber-hilt {
+  opacity: 1;
+  animation: lightsaber-glow 1.5s infinite;
+}
+
+@keyframes lightsaber-glow {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+/* Loading indicator */
+.loading-indicator {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.death-star-loader {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%,
+  var(--star-wars-light-gray) 5%,
+  var(--star-wars-dark-gray) 6%,
+  var(--star-wars-dark-gray) 94%,
+  var(--star-wars-light-gray) 95%);
+  position: relative;
+  margin: 0 auto 20px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  animation: rotate-loader 4s linear infinite;
+}
+
+.death-star-loader::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 15%;
+  height: 15%;
+  border-radius: 50%;
+  background-color: var(--star-wars-light-gray);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.8);
+}
+
+.death-star-loader::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -5%;
+  width: 110%;
+  height: 4px;
+  background-color: rgba(50, 50, 50, 0.8);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
+@keyframes rotate-loader {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-indicator p {
+  font-size: 1.2rem;
+  color: var(--star-wars-yellow);
+  text-shadow: 0 0 5px var(--star-wars-yellow-glow);
+}
+
+.loading-dots {
+  display: inline-block;
+  animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+  0% { content: '.'; }
+  33% { content: '..'; }
+  66% { content: '...'; }
+  100% { content: '.'; }
+}
+
+/* Battle Arena */
+.battle-arena {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 40px 0;
+  position: relative;
+}
+
+/* Character Cards */
+.character-card {
+  flex: 0 1 45%;
+  background-color: rgba(10, 10, 10, 0.8);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.character-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.character-card[data-side="light"] {
+  border-left: 5px solid var(--light-side-blue);
+  box-shadow: 0 5px 20px rgba(58, 130, 247, 0.2);
+}
+
+.character-card[data-side="light"]::before {
+  background: linear-gradient(90deg, transparent, var(--light-side-blue-glow), transparent);
+}
+
+.character-card[data-side="dark"] {
+  border-left: 5px solid var(--dark-side-red);
+  box-shadow: 0 5px 20px rgba(226, 54, 54, 0.2);
+}
+
+.character-card[data-side="dark"]::before {
+  background: linear-gradient(90deg, transparent, var(--dark-side-red-glow), transparent);
+}
+
+.character-card.active-turn {
+  transform: scale(1.05) translateY(-10px);
+  z-index: 5;
+}
+
+.character-card[data-side="light"].active-turn {
+  box-shadow: 0 0 25px var(--light-side-blue-glow);
+}
+
+.character-card[data-side="dark"].active-turn {
+  box-shadow: 0 0 25px var(--dark-side-red-glow);
+}
+
+.character-card.defeated {
+  opacity: 0.5;
+  filter: grayscale(90%);
+  transform: scale(0.95);
+}
+
+.character-card.victorious {
+  z-index: 10;
+  animation: victory-pulse 2s infinite alternate;
+}
+
+@keyframes victory-pulse {
+  0% { transform: scale(1); box-shadow: 0 0 15px var(--star-wars-yellow-glow); }
+  100% { transform: scale(1.03); box-shadow: 0 0 30px var(--star-wars-yellow-glow); }
+}
+
+/* Character Image */
+.character-image-container {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 20px;
+}
+
+.character-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--star-wars-yellow);
+  box-shadow: 0 0 15px rgba(255, 232, 31, 0.5);
+  position: relative;
+}
+
+.character-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.character-card.active-turn .character-image img {
+  transform: scale(1.05);
+}
+
+.character-side-indicator {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.character-side-indicator[data-side="light"] {
+  background-color: var(--light-side-blue);
+  color: white;
+  box-shadow: 0 0 10px var(--light-side-blue-glow);
+}
+
+.character-side-indicator[data-side="dark"] {
+  background-color: var(--dark-side-red);
+  color: white;
+  box-shadow: 0 0 10px var(--dark-side-red-glow);
+}
+
+.lightsaber-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 20px rgba(58, 130, 247, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.character-card[data-side="light"] .lightsaber-glow {
+  box-shadow: inset 0 0 20px var(--light-side-blue-glow);
+}
+
+.character-card[data-side="dark"] .lightsaber-glow {
+  box-shadow: inset 0 0 20px var(--dark-side-red-glow);
+}
+
+.character-card.active-turn .lightsaber-glow {
+  opacity: 1;
+  animation: glow-pulse 1.5s infinite alternate;
+}
+
+@keyframes glow-pulse {
+  0% { opacity: 0.3; }
+  100% { opacity: 0.8; }
+}
+
+/* Character Name */
+.character-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--star-wars-yellow);
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px var(--star-wars-yellow-glow);
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.character-card h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--star-wars-yellow), transparent);
+}
+
+/* Health Bar */
+.health-bar-container {
+  margin-bottom: 20px;
+}
+
+.health-bar {
+  width: 100%;
+  height: 25px;
+  background-color: rgba(50, 50, 50, 0.8);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--star-wars-yellow);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.health-fill {
+  height: 100%;
+  background: linear-gradient(90deg,
+  var(--dark-side-red) 0%,
+  var(--rebel-orange) 50%,
+  var(--star-wars-yellow) 100%);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  border-radius: 12px;
+}
+
+.health-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-shadow: 1px 1px 3px black;
+  z-index: 1;
+}
+
+/* Attributes */
+.attributes {
+  margin-bottom: 20px;
+}
+
+.attribute-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.attribute-label {
+  width: 25%;
+  color: var(--star-wars-yellow);
+  font-weight: bold;
+}
+
+.attribute-bar {
+  width: 60%;
+  height: 10px;
+  background-color: rgba(50, 50, 50, 0.8);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.attribute-fill {
+  height: 100%;
+  background-color: var(--star-wars-yellow);
+  transition: width 0.5s ease;
+}
+
+.character-card[data-side="light"] .attribute-fill {
+  background-color: var(--light-side-blue);
+}
+
+.character-card[data-side="dark"] .attribute-fill {
+  background-color: var(--dark-side-red);
+}
+
+.attribute-value {
+  width: 10%;
+  text-align: right;
+  font-weight: bold;
+}
+
+/* Weapon Display */
+.weapon-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.weapon-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.weapon-icon.lightsaber {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFE81F'%3E%3Cpath d='M22,8V6L13,2v2l2,1v1L6,9v2l3,1.5V19c0,1.1-0.9,2-2,2v1h10v-1c-1.1,0-2-0.9-2-2v-6.5L18,11V9l2-0.5V8H22z'/%3E%3C/svg%3E");
+}
+
+.weapon-icon.blaster {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFE81F'%3E%3Cpath d='M7,5h13v3h2V5c0-1.1-0.9-2-2-2H7C5.9,3,5,3.9,5,5v3h2V5z M18,13l-4-3v2H7c-1.1,0-2,0.9-2,2v4h2v-4h7v2L18,13z'/%3E%3C/svg%3E");
+}
+
+.weapon-icon.force {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFE81F'%3E%3Cpath d='M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8S16.41,20,12,20z'/%3E%3Cpath d='M12,6c-3.31,0-6,2.69-6,6s2.69,6,6,6s6-2.69,6-6S15.31,6,12,6z M12,16c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S14.21,16,12,16z'/%3E%3C/svg%3E");
+}
+
+.weapon-name {
+  font-weight: bold;
+  color: var(--star-wars-yellow);
+}
+
+/* Power Score */
+.power-score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: rgba(255, 232, 31, 0.1);
+  border-radius: 8px;
+  border: 1px solid var(--star-wars-yellow);
+}
+
+.power-label {
+  color: var(--star-wars-yellow);
+  font-weight: bold;
+}
+
+.power-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 5px var(--star-wars-yellow);
+}
+
+/* VS Section */
+.vs {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.vs-circle {
+  width: 70px;
+  height: 70px;
+  background-color: var(--star-wars-black);
+  color: var(--star-wars-yellow);
+  border: 2px solid var(--star-wars-yellow);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  box-shadow: 0 0 15px var(--star-wars-yellow-glow);
+  position: relative;
+}
+
+.saber-cross {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.saber-cross::before,
+.saber-cross::after {
+  content: "";
+  position: absolute;
+  background: var(--star-wars-yellow);
+  box-shadow: 0 0 5px var(--star-wars-yellow-glow);
+}
+
+.saber-cross::before {
+  top: 50%;
+  left: -60%;
+  width: 220%;
+  height: 2px;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.saber-cross::after {
+  top: -60%;
+  left: 50%;
+  width: 2px;
+  height: 220%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+/* Winner Section */
+.winner {
+  text-align: center;
+  margin: 40px 0;
+  padding: 30px;
+  background-color: rgba(20, 20, 20, 0.8);
+  border-radius: 12px;
+  border: 3px solid var(--star-wars-yellow);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 30px var(--star-wars-yellow-glow);
+  animation: winner-glow 2s infinite alternate;
+}
+
+@keyframes winner-glow {
+  0% { box-shadow: 0 0 20px var(--star-wars-yellow-glow); }
+  100% { box-shadow: 0 0 40px var(--star-wars-yellow-glow); }
+}
+
+.winner h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: var(--star-wars-yellow);
+  text-shadow: 0 0 15px var(--star-wars-yellow-glow);
+  letter-spacing: 2px;
+}
+
+.winner-name {
+  display: block;
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 10px 0;
+}
+
+.confetti {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.3;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Ccircle cx='5' cy='5' r='5' fill='%23FFE81F'/%3E%3C/svg%3E");
+  background-size: 20px 20px;
+  animation: confetti-fall 10s linear infinite;
+}
+
+.lightsaber-confetti {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  opacity: 0.2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Cpath d='M10,2 L12,7 L17,9 L12,11 L10,16 L8,11 L3,9 L8,7 L10,2 Z' fill='%23FFE81F'/%3E%3C/svg%3E");
+  background-size: 40px 40px;
+  animation: confetti-fall 15s linear infinite;
+}
+
+@keyframes confetti-fall {
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 1000px; }
+}
+
+/* Battle Log */
+.battle-log-container {
+  margin-top: 50px;
+  background-color: rgba(20, 20, 20, 0.8);
+  border-radius: 12px;
+  padding: 25px;
+  border: 2px solid var(--star-wars-yellow);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.log-title {
+  color: var(--star-wars-yellow);
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.log-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: 40%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--star-wars-yellow), transparent);
+}
+
+.battle-log {
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  scrollbar-width: thin;
+  scrollbar-color: var(--star-wars-yellow) var(--star-wars-dark-gray);
+}
+
+.battle-log::-webkit-scrollbar {
+  width: 8px;
+}
+
+.battle-log::-webkit-scrollbar-track {
+  background: var(--star-wars-dark-gray);
+  border-radius: 4px;
+}
+
+.battle-log::-webkit-scrollbar-thumb {
+  background-color: var(--star-wars-yellow);
+  border-radius: 4px;
+  border: 2px solid var(--star-wars-dark-gray);
+}
+
+.log-entry {
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-left: 4px solid var(--star-wars-yellow);
+  background-color: rgba(20, 20, 20, 0.7);
+  border-radius: 0 8px 8px 0;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.log-entry.attack {
+  border-left-color: var(--light-side-blue);
+  background-color: rgba(58, 130, 247, 0.1);
+}
+
+.log-entry.special {
+  border-left-color: var(--dark-side-red);
+  background-color: rgba(226, 54, 54, 0.1);
+}
+
+.log-entry.critical {
+  border-left-color: #ff8c00;
+  background-color: rgba(255, 140, 0, 0.1);
+  font-weight: bold;
+}
+
+.log-entry.status {
+  border-left-color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.1);
+}
+
+.log-entry.new-entry {
+  animation: new-log 0.5s ease;
+}
+
+@keyframes new-log {
+  0% { transform: translateX(-20px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+.log-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.log-icon.attack-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233a82f7'%3E%3Cpath d='M12.5,5l7,7H14v6h-3v-6H6L12.5,5z'/%3E%3C/svg%3E");
+}
+
+.log-icon.special-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e23636'%3E%3Cpath d='M12,2l3.09,6.26L22,9.27l-5,4.87l1.18,6.88L12,17.77l-6.18,3.25L7,14.14L2,9.27l6.91-1.01L12,2z'/%3E%3C/svg%3E");
+}
+
+.log-icon.critical-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff8c00'%3E%3Cpath d='M12,2C6.47,2,2,6.47,2,12s4.47,10,10,10s10-4.47,10-10S17.53,2,12,2z M13,17h-2v-2h2V17z M13,13h-2V7h2V13z'/%3E%3C/svg%3E");
+}
+
+.log-icon.status-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232ecc71'%3E%3Cpath d='M12,21.35l-1.45-1.32C5.4,15.36,2,12.28,2,8.5C2,5.42,4.42,3,7.5,3c1.74,0,3.41,0.81,4.5,2.09C13.09,3.81,14.76,3,16.5,3C19.58,3,22,5.42,22,8.5c0,3.78-3.4,6.86-8.55,11.54L12,21.35z'/%3E%3C/svg%3E");
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.control-button {
+  padding: 12px 25px;
+  background-color: rgba(20, 20, 20, 0.8);
+  color: var(--star-wars-yellow);
+  border: 2px solid var(--star-wars-yellow);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+}
+
+.control-button:hover {
+  background-color: var(--star-wars-yellow);
+  color: var(--star-wars-black);
+  box-shadow: 0 0 15px var(--star-wars-yellow-glow);
+}
+
+.button-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+/* Animation Styles */
+@keyframes saberSwing {
+  0% { transform: translateZ(0) rotate(0deg); }
+  25% { transform: translateZ(0) rotate(5deg) scale(1.05); }
+  50% { transform: translateZ(0) rotate(-15deg) scale(1.1); }
+  75% { transform: translateZ(0) rotate(10deg) scale(1.05); }
+  100% { transform: translateZ(0) rotate(0deg); }
+}
+
+.attack-animation {
+  animation: saberSwing 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes specialAttack {
+  0% { transform: translateZ(0) scale(1); filter: brightness(1); }
+  50% { transform: translateZ(0) scale(1.1); filter: brightness(1.5); }
+  100% { transform: translateZ(0) scale(1); filter: brightness(1); }
+}
+
+.special-attack {
+  animation: specialAttack 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes forcePush {
+  0% { transform: translateZ(0); filter: brightness(1); }
+  20% { transform: translateZ(0) scale(1.1); filter: brightness(1.3); }
+  40% { transform: translateZ(0) translateX(20px); filter: brightness(1); }
+  100% { transform: translateZ(0); filter: brightness(1); }
+}
+
+.push-animation {
+  animation: forcePush 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes burnEffect {
+  0% { box-shadow: inset 0 0 20px rgba(255, 100, 0, 0); }
+  50% { box-shadow: inset 0 0 50px rgba(255, 100, 0, 0.8); }
+  100% { box-shadow: inset 0 0 20px rgba(255, 100, 0, 0); }
+}
+
+.burning-animation {
+  animation: burnEffect 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.blaster-animation::after {
+  content: "";
+  position: absolute;
+  top: var(--hole-y);
+  left: var(--hole-x);
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle, rgba(255,232,31,0.9) 0%, rgba(255,90,31,0.8) 40%, rgba(226,54,54,0) 70%);
+  border-radius: 50%;
+  animation: blasterShot 0.4s ease-out forwards;
+  box-shadow: 0 0 20px rgba(255, 232, 31, 0.5);
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+/* Ajouts pour compléter le CSS existant */
+
+/* Styles pour le loader qui était manquant */
+.loader {
+  border: 5px solid rgba(255, 232, 31, 0.2);
+  border-radius: 50%;
+  border-top: 5px solid var(--star-wars-yellow);
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Styles pour les images de personnages */
+.character-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.character-card.active-turn .character-image img {
+  transform: scale(1.05);
+}
+
+/* Styles pour les barres de santé */
+.health-bar {
+  height: 20px;
+  background-color: rgba(50, 50, 50, 0.8);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.health-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e23636 0%, #ff5a1f 50%, #2ecc71 100%);
+  transition: width 0.5s ease;
+}
+
+.health-bar span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 0.8rem;
+  text-shadow: 1px 1px 2px black;
+}
+
+/* Styles pour les attributs */
+.attributes {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.attributes p {
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+
+/* Styles pour le côté du personnage */
+.character-side {
+  text-align: center;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.character-side[data-side="light"] {
+  background-color: var(--light-side-blue);
+  color: white;
+}
+
+.character-side[data-side="dark"] {
+  background-color: var(--dark-side-red);
+  color: white;
+}
+
+/* Animation de tir de blaster */
+@keyframes blasterShot {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .battle-arena {
+    flex-direction: column;
+  }
+
+  .character-card {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .vs {
+    margin: 20px 0;
+    transform: rotate(90deg);
+  }
+
+  .title-shadow {
+    font-size: 2.5rem;
+  }
+
+  .title-main {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .battle-container {
+    padding: 15px;
+  }
+
+  .title-shadow {
+    font-size: 2rem;
+  }
+
+  .title-main {
+    font-size: 1.2rem;
+  }
+
+  .battle-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+
+  .controls {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .control-button {
+    width: 100%;
+  }
+}
+
+/* place log à gauche, arène à droite */
+.battle-main {
+  display: flex;
+  align-items: flex-start;   /* aligne en haut */
+  gap: 20px;                  /* espace entre log et arène */
+}
+
+.battle-log-container {
+  order: 1;                   /* première colonne */
+  flex: 0 0 30%;              /* prend 30% de la largeur */
+  max-width: 300px;           /* ou votre largeur max souhaitée */
+}
+
+.battle-arena {
+  order: 2;                   /* deuxième colonne */
+  flex: 1;                    /* prend le reste */
+}
+
+/* adaptation responsive */
+@media (max-width: 768px) {
+  .battle-main {
+    flex-direction: column;
+  }
+  .battle-log-container,
+  .battle-arena {
+    flex: 1 0 auto;
+    max-width: none;
+  }
+}
+
+/* Dans battle.component.css, à la fin */
+
+/* 1) Fixe la largeur du log à 300px (ou ce qui vous convient) */
+.battle-main .battle-log-container {
+  flex: 0 0 300px;  /* largeur fixe */
+}
+
+/* 2) Réduit la taille des character-card */
+.battle-main .battle-arena .character-card {
+  flex: 0 1 35%;    /* passe de 45% à 35% de l'espace disponible */
+  max-width: 260px; /* largeur max pour éviter qu'elles grandissent trop */
+}
+
+/* 3) Ajuste l'espace entre les cartes et le “VS” si besoin */
+.battle-main .battle-arena {
+  justify-content: space-around;
+}
+
+/* overlay semi-transparent */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* boîte de la popup */
+.modal {
+  background: #111;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  border: 2px solid var(--star-wars-yellow);
+  box-shadow: 0 0 20px var(--star-wars-yellow-glow);
+  max-width: 320px;
+  width: 90%;
+}
+
+/* Titre et nom du vainqueur */
+.modal h2 {
+  font-size: 2rem;
+  color: var(--star-wars-yellow);
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px var(--star-wars-yellow-glow);
+}
+.modal .winner-name {
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+/* Bouton Fermer */
+.modal-close {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: var(--star-wars-yellow);
+  color: var(--star-wars-black);
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--star-wars-yellow-glow);
+  transition: all 0.2s ease;
+}
+.modal-close:hover {
+  transform: scale(1.05);
 }

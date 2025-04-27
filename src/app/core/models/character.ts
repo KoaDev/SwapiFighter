@@ -6,11 +6,10 @@ export interface Character {
   starships: string[];
   vehicles: string[];
   url: string;
+  side?: 'light' | 'dark' | null;
+  mainWeapon?: string;
+  forceSensitive?: boolean;
   powerScore?: number;
-  health?: number;
-  attributes?: {
-    strength: number;
-    agility: number;
-    intelligence: number;
-  };
+  health: number;
+  attributes?: { strength: number; agility: number; intelligence: number; };
 }

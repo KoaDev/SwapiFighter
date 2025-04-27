@@ -1,5 +1,5 @@
-// src/app/services/swapi.service.ts
-import { Injectable } from '@angular/core';
+// src/app/core/services/swapi.service.ts
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Character } from '../models/character';
@@ -8,9 +8,8 @@ import { Character } from '../models/character';
   providedIn: 'root'
 })
 export class SwapiService {
-  private apiUrl = 'https://swapi.dev/api';
-
-  constructor(private http: HttpClient) { }
+  private apiUrl = 'http://52.58.110.120/api';
+  private http = inject(HttpClient);
 
   getRandomCharacter(): Observable<Character> {
     const randomId = Math.floor(Math.random() * 82) + 1;

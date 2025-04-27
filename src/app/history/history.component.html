@@ -1,25 +1,40 @@
 <div class="history-container">
-  <h2>Historique des Combats</h2>
+  <h2 class="history-title">Historique des Combats</h2>
 
   <button (click)="clearHistory()" class="clear-button">
     Effacer l'historique
   </button>
 
-  <div class="history-list">
-    <div *ngFor="let battle of battleHistory" class="battle-entry">
-      <h3>{{ battle.date | date:'medium' }}</h3>
-      <p>Vainqueur: <strong>{{ battle.winner }}</strong> ({{ battle.winnerHealth }}% PV)</p>
-      <p>Participants: {{ battle.characters[0].name }} vs {{ battle.characters[1].name }}</p>
+  <!-- Wrapper principal en deux colonnes -->
+  <div class="history-main">
+    <!-- Colonne de gauche : la liste des combats -->
+    <div class="history-list">
+      @for (battle of battleHistory; track battle.date) {
+        <div class="battle-entry card">
+          <h3>{{ battle.date }}</h3>
+          <p>Vainqueur : <strong>{{ battle.winner }}</strong> ({{ battle.winnerHealth }}% PV)</p>
+          <p>Participants : {{ battle.characters[0].name }} vs {{ battle.characters[1].name }}</p>
+        </div>
+      }
+      @empty {
+        <div class="empty-message">Aucun combat enregistré</div>
+      }
     </div>
-  </div>
 
-  <h2>Classement des Champions</h2>
-  <div class="ranking-list">
-    <div *ngFor="let character of ranking; let i = index" class="ranking-entry">
-      <span class="rank">#{{ i + 1 }}</span>
-      <span class="name">{{ character.name }}</span>
-      <span class="wins">{{ character.wins }} victoires</span>
-      <span class="power">Score: {{ character.powerScore }}</span>
+    <!-- Colonne de droite : le classement -->
+    <div class="ranking-list">
+      <h2 class="ranking-title">Classement des Champions</h2>
+      @for (character of ranking; track character.name; let i = $index) {
+        <div class="ranking-entry card">
+          <span class="rank">#{{ i + 1 }}</span>
+          <span class="name">{{ character.name }}</span>
+          <span class="wins">{{ character.wins }} victoires</span>
+          <span class="power">Score : {{ character.powerScore }}</span>
+        </div>
+      }
+      @empty {
+        <div class="empty-message">Aucun personnage classé</div>
+      }
     </div>
   </div>
 </div>

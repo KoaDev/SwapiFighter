@@ -1,53 +1,104 @@
+/* Conteneur général, repris de .battle-container */
 .history-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  border: 3px solid var(--star-wars-yellow);
+  box-shadow: 0 0 30px var(--star-wars-yellow-glow);
+  border-radius: 12px;
+  max-width: 900px;
 }
 
-.clear-button {
-  background-color: #ff4444;
-  color: white;
-  border: none;
-  padding: 8px 16px;
+/* Titres */
+.history-title,
+.ranking-title {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--star-wars-yellow);
   margin-bottom: 20px;
-  border-radius: 4px;
+  text-align: center;
+}
+
+/* Bouton effacer */
+.clear-button {
+  display: block;
+  margin: 0 auto 30px;
+  padding: 10px 20px;
+  background-color: rgba(20,20,20,0.8);
+  color: var(--star-wars-yellow);
+  border: 2px solid var(--star-wars-yellow);
+  border-radius: 30px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+.clear-button:hover {
+  background-color: var(--star-wars-yellow);
+  color: var(--star-wars-black);
+  box-shadow: 0 0 15px var(--star-wars-yellow-glow);
 }
 
-.history-list, .ranking-list {
-  margin-top: 20px;
+/* Deux colonnes */
+.history-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
 }
 
-.battle-entry, .ranking-entry {
-  background-color: #f5f5f5;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+/* Colonne de gauche fixe */
+.history-list {
+  flex: 0 0 40%;
+  max-width: 350px;
 }
 
+/* Colonne de droite qui pousse */
+.ranking-list {
+  flex: 1;
+}
+
+/* Style des cartes (entries & ranking) */
+.card {
+  background-color: rgba(10,10,10,0.8);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* Particularités de l’historique */
+.battle-entry h3 {
+  margin-top: 0;
+  color: var(--star-wars-yellow);
+}
+
+/* Particularités du classement */
 .ranking-entry {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 15px;
+  font-size: 0.95rem;
+}
+.ranking-entry .rank {
+  font-weight: bold;
+}
+.ranking-entry .name {
+  flex: 1;
+  margin: 0 10px;
+}
+.ranking-entry .wins,
+.ranking-entry .power {
+  white-space: nowrap;
+}
 
-  .rank {
-    font-weight: bold;
-    color: #333;
-    min-width: 30px;
+/* Responsive */
+@media (max-width: 768px) {
+  .history-main {
+    flex-direction: column;
   }
-
-  .name {
-    flex-grow: 1;
-    font-weight: bold;
-  }
-
-  .wins {
-    color: #4CAF50;
-    font-weight: bold;
-  }
-
-  .power {
-    color: #2196F3;
+  .history-list,
+  .ranking-list {
+    flex: 1 0 auto;
+    max-width: none;
   }
 }
