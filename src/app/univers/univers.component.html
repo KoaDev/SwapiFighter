@@ -1,0 +1,59 @@
+<!-- univers.component.html -->
+<div class="universe-container">
+  <h1>Star Wars Universe Explorer</h1>
+
+  <div class="category-filter">
+    <button
+      (click)="filterByCategory('all')"
+      [class.active]="selectedCategory === 'all'">
+      Tous
+    </button>
+    <button
+      (click)="filterByCategory('characters')"
+      [class.active]="selectedCategory === 'characters'">
+      Personnages
+    </button>
+    <button
+      (click)="filterByCategory('planets')"
+      [class.active]="selectedCategory === 'planets'">
+      Planètes
+    </button>
+    <button
+      (click)="filterByCategory('starships')"
+      [class.active]="selectedCategory === 'starships'">
+      Vaisseaux
+    </button>
+  </div>
+
+  @if (loading) {
+    <div class="loading">Chargement des données...</div>
+  } @else {
+    @for (group of filteredData; track group.film.episode_id) {
+      @if (group.items.length > 0) {
+        <div class="film-section">
+          <h2>Épisode {{ group.film.episode_id }}: {{ group.film.title }}</h2>
+          <p class="film-description">{{ group.film.opening_crawl }}</p>
+
+          <div class="items-grid">
+            @for (item of group.items; track item.url) {
+              <div class="universe-card" [class.character]="item.type === 'character'">
+                <h3>{{ item.name }}</h3>
+                <p>Type: {{ getDisplayType(item.type) }}</p>
+                <!-- Plus de détails selon le type -->
+                @if (item.type === 'character') {
+                  <p>Genre: {{ item.metadata.gender || 'Inconnu' }}</p>
+                }
+                @if (item.type === 'planet') {
+                  <p>Climat: {{ item.metadata.climate || 'Inconnu' }}</p>
+                }
+                @if (item.type === 'starship') {
+                  <p>Modèle: {{ item.metadata.model || 'Inconnu' }}</p>
+                }
+              </div>
+            }
+          </div>
+        </div>
+      }
+    }
+  }
+</div>

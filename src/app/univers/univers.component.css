@@ -1,0 +1,122 @@
+.universe-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #000000;
+  color: #ffd700; /* Jaune or Star Wars */
+}
+
+.category-filter {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.category-filter button {
+  padding: 8px 20px;
+  cursor: pointer;
+  background-color: #000000;
+  color: #ffd700;
+  border: 2px solid #ffd700;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.category-filter button:hover {
+  background-color: #ffd700;
+  color: #000000;
+}
+
+.category-filter button.active {
+  background-color: #ffd700;
+  color: #000000;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #ffd700;
+}
+
+.film-section {
+  margin-bottom: 40px;
+  padding: 25px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid #ffd700;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.film-section h2 {
+  color: #ffd700;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.film-description {
+  font-style: italic;
+  margin: 15px 0;
+  line-height: 1.6;
+  color: #ffffff;
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.universe-card {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  border: 1px solid #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #ffffff;
+}
+
+.universe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(255, 215, 0, 0.2);
+}
+
+.universe-card h3 {
+  color: #ffd700;
+  margin-bottom: 10px;
+  font-size: 1.3em;
+}
+
+.universe-card p {
+  margin: 8px 0;
+  color: #cccccc;
+}
+
+.universe-card.character {
+  border-left: 4px solid #ffd700;
+}
+
+.universe-card.planet {
+  border-left: 4px solid #4CAF50; /* Vert pour les planètes */
+}
+
+.universe-card.starship {
+  border-left: 4px solid #2196F3; /* Bleu pour les vaisseaux */
+}
+
+.loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.4em;
+  color: #ffd700;
+}
+
+/* Animation pour le loading */
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.loading::after {
+  content: '...';
+  animation: pulse 1.5s infinite;
+}
