@@ -1,11 +1,6 @@
-# .github/workflows/linter.yml
 name: Angular Linter
 
-on:
-  push:
-    branches: [ "main", "develop" ]
-  pull_request:
-    branches: [ "main", "develop" ]
+on: [push, pull_request]
 
 jobs:
   lint:
