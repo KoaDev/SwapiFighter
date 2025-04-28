@@ -1,8 +1,10 @@
 # 🌟 Star Wars Battle - Angular Application
 
 ## 🚀 Overview
+
 A web application built with **Angular** that simulates battles between Star Wars characters.  
 Key features:
+
 - Battle simulation between characters.
 - History tracking of past battles.
 - Information about the app and its creators.
@@ -10,6 +12,7 @@ Key features:
 ---
 
 ## 🛠️ Technical Stack
+
 - **Framework**: Angular 17+ (Standalone Components)
 - **Routing**: Client-side navigation with `@angular/router`.
 - **HTTP**: Data fetching via `HttpClient` (Observables/RxJS).
@@ -19,6 +22,7 @@ Key features:
 ---
 
 ## 📂 Project Structure
+
 ```plaintext
 src/
 ├── app/
@@ -32,3 +36,4 @@ src/
 │   ├── app.component.ts      # Root component
 │   ├── app.routes.ts         # Route definitions
 │   └── app.config.ts         # App configuration (HTTP, Router)
+```

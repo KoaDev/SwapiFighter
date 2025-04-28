@@ -12,11 +12,17 @@
       @for (battle of battleHistory; track battle.date) {
         <div class="battle-entry card">
           <h3>{{ battle.date }}</h3>
-          <p>Vainqueur : <strong>{{ battle.winner }}</strong> ({{ battle.winnerHealth }}% PV)</p>
-          <p>Participants : {{ battle.characters[0].name }} vs {{ battle.characters[1].name }}</p>
+          <p>
+            Vainqueur : <strong>{{ battle.winner }}</strong> ({{
+              battle.winnerHealth
+            }}% PV)
+          </p>
+          <p>
+            Participants : {{ battle.characters[0].name }} vs
+            {{ battle.characters[1].name }}
+          </p>
         </div>
-      }
-      @empty {
+      } @empty {
         <div class="empty-message">Aucun combat enregistré</div>
       }
     </div>
@@ -31,8 +37,7 @@
           <span class="wins">{{ character.wins }} victoires</span>
           <span class="power">Score : {{ character.powerScore }}</span>
         </div>
-      }
-      @empty {
+      } @empty {
         <div class="empty-message">Aucun personnage classé</div>
       }
     </div>

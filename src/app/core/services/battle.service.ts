@@ -3,38 +3,38 @@ import { Attack } from '../models/attack';
 import { Character } from '../models/character';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BattleService {
   private attacks: Attack[] = [
     {
-      name: "Sabre Laser",
+      name: 'Sabre Laser',
       damage: 30,
-      description: "Une attaque rapide au sabre laser",
+      description: 'Une attaque rapide au sabre laser',
       specialEffect: (target: Character) => {
         // 20% de chance de brûlure
         if (Math.random() < 0.2) {
           target.health! -= 5;
-          return "Brûlure! 5 dégâts supplémentaires";
+          return 'Brûlure! 5 dégâts supplémentaires';
         }
-        return "";
-      }
+        return '';
+      },
     },
     {
-      name: "Force Push",
+      name: 'Force Push',
       damage: 25,
       description: "Repousse l'adversaire avec la Force",
       specialEffect: (target: Character) => {
         // Réduit l'agilité pour le prochain tour
         target.attributes!.agility -= 5;
-        return "Agilité réduite de 5 points";
-      }
+        return 'Agilité réduite de 5 points';
+      },
     },
     {
-      name: "Tir de Blaster",
+      name: 'Tir de Blaster',
       damage: 20,
-      description: "Tir précis avec un blaster"
-    }
+      description: 'Tir précis avec un blaster',
+    },
   ];
 
   /**
@@ -51,7 +51,7 @@ export class BattleService {
    */
   performAttack(
     attacker: Character,
-    defender: Character
+    defender: Character,
   ): {
     damage: number;
     message: string;
@@ -66,7 +66,7 @@ export class BattleService {
 
     let message = `${attacker.name} utilise ${attack.name}`;
     if (criticalHit) {
-      message += " (COUP CRITIQUE!)";
+      message += ' (COUP CRITIQUE!)';
     }
     message += ` et inflige ${damage} dégâts!`;
 
@@ -91,7 +91,7 @@ export class BattleService {
    */
   checkBattleStatus(
     character1: Character,
-    character2: Character
+    character2: Character,
   ): { finished: boolean; winner?: Character } {
     if (character1.health! <= 0) {
       return { finished: true, winner: character2 };

@@ -9,7 +9,7 @@ import { UniverseService } from '../core/services/universe.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './univers.component.html',
-  styleUrls: ['./univers.component.css']
+  styleUrls: ['./univers.component.css'],
 })
 export class UniversComponent implements OnInit {
   universeData: { film: Film; items: UniverseItem[] }[] = [];
@@ -33,35 +33,40 @@ export class UniversComponent implements OnInit {
       error: (err) => {
         console.error('Error loading universe data', err);
         this.loading = false;
-      }
+      },
     });
   }
 
-  filterByCategory(category: 'all' | 'characters' | 'planets' | 'starships'): void {
+  filterByCategory(
+    category: 'all' | 'characters' | 'planets' | 'starships',
+  ): void {
     this.selectedCategory = category;
     this.applyFilter();
   }
 
   private applyFilter(): void {
     if (this.selectedCategory === 'all') {
-      this.filteredData = this.universeData.map(group => ({
+      this.filteredData = this.universeData.map((group) => ({
         film: group.film,
-        items: [...group.items] // Copie des items
+        items: [...group.items], // Copie des items
       }));
       return;
     }
 
     // Détermine le type correspondant à la catégorie
-    const typeMap: Record<'characters' | 'planets' | 'starships', UniverseItem['type']> = {
+    const typeMap: Record<
+      'characters' | 'planets' | 'starships',
+      UniverseItem['type']
+    > = {
       characters: 'character',
-      planets:     'planet',
-      starships:   'starship'
+      planets: 'planet',
+      starships: 'starship',
     };
     const targetType = typeMap[this.selectedCategory];
 
-    this.filteredData = this.universeData.map(group => ({
+    this.filteredData = this.universeData.map((group) => ({
       film: group.film,
-      items: group.items.filter(item => item.type === targetType)
+      items: group.items.filter((item) => item.type === targetType),
     }));
   }
 
@@ -69,10 +74,10 @@ export class UniversComponent implements OnInit {
   getDisplayType(type: UniverseItem['type']): string {
     const typeNames: Record<UniverseItem['type'], string> = {
       character: 'Personnage',
-      planet:    'Planète',
-      starship:  'Vaisseau',
-      vehicle:   'Véhicule',
-      species:   'Espèce'
+      planet: 'Planète',
+      starship: 'Vaisseau',
+      vehicle: 'Véhicule',
+      species: 'Espèce',
     };
     return typeNames[type] || type;
   }

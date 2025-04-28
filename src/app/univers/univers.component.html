@@ -5,22 +5,26 @@
   <div class="category-filter">
     <button
       (click)="filterByCategory('all')"
-      [class.active]="selectedCategory === 'all'">
+      [class.active]="selectedCategory === 'all'"
+    >
       Tous
     </button>
     <button
       (click)="filterByCategory('characters')"
-      [class.active]="selectedCategory === 'characters'">
+      [class.active]="selectedCategory === 'characters'"
+    >
       Personnages
     </button>
     <button
       (click)="filterByCategory('planets')"
-      [class.active]="selectedCategory === 'planets'">
+      [class.active]="selectedCategory === 'planets'"
+    >
       Planètes
     </button>
     <button
       (click)="filterByCategory('starships')"
-      [class.active]="selectedCategory === 'starships'">
+      [class.active]="selectedCategory === 'starships'"
+    >
       Vaisseaux
     </button>
   </div>
@@ -36,18 +40,21 @@
 
           <div class="items-grid">
             @for (item of group.items; track item.url) {
-              <div class="universe-card" [class.character]="item.type === 'character'">
+              <div
+                class="universe-card"
+                [class.character]="item.type === 'character'"
+              >
                 <h3>{{ item.name }}</h3>
                 <p>Type: {{ getDisplayType(item.type) }}</p>
                 <!-- Plus de détails selon le type -->
-                @if (item.type === 'character') {
-                  <p>Genre: {{ item.metadata['gender'] || 'Inconnu' }}</p>
+                @if (item.type === "character") {
+                  <p>Genre: {{ item.metadata["gender"] || "Inconnu" }}</p>
                 }
-                @if (item.type === 'planet') {
-                  <p>Climat: {{ item.metadata['climate'] || 'Inconnu' }}</p>
+                @if (item.type === "planet") {
+                  <p>Climat: {{ item.metadata["climate"] || "Inconnu" }}</p>
                 }
-                @if (item.type === 'starship') {
-                  <p>Modèle: {{ item.metadata['model'] || 'Inconnu' }}</p>
+                @if (item.type === "starship") {
+                  <p>Modèle: {{ item.metadata["model"] || "Inconnu" }}</p>
                 }
               </div>
             }

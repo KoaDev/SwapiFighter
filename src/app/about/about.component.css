@@ -1,8 +1,8 @@
 /* battle.component.css */
-@import url('https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap");
 
 :root {
-  --star-wars-yellow: #FFE81F;
+  --star-wars-yellow: #ffe81f;
   --star-wars-yellow-glow: rgba(255, 232, 31, 0.7);
   --star-wars-black: #000000;
   --star-wars-dark-gray: #0a0a0a;
@@ -16,8 +16,9 @@
 }
 
 @font-face {
-  font-family: 'Star Jedi';
-  src: url('https://db.onlinewebfonts.com/t/0c724f6aa457310440cf8949c615cbd7.woff2') format('woff2');
+  font-family: "Star Jedi";
+  src: url("https://db.onlinewebfonts.com/t/0c724f6aa457310440cf8949c615cbd7.woff2")
+    format("woff2");
   font-weight: normal;
   font-style: normal;
 }
@@ -26,12 +27,13 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--star-wars-black);
-  font-family: 'Pathway Gothic One', sans-serif;
+  font-family: "Pathway Gothic One", sans-serif;
   color: #ffffff;
 }
 
 /* Stars background animation */
-.stars, .twinkling {
+.stars,
+.twinkling {
   position: fixed;
   top: 0;
   left: 0;
@@ -43,17 +45,25 @@ body {
 }
 
 .stars {
-  background: #000 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8yOS8xMiKqq3kAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAFBklEQVR4nO2a23LbMAxEF5LtNP//sW2dttOLKdkPGWxISRSF7QbZncGAV9XxCuyClNT7+/s7MYbzp3YAE4YKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBm+OV9oLXWbq21F8/jpmma3lprf733b5zjh85P79C8tbY0tD3vXPtprR3ixyjkiXNrrW3vEIL2Y9nfWvsbdL0HKcgZxS/gvoCrpAfJCfCNJXdE8Ys3iF9I1gXlIFSQLEbIC9oPJGUHeYOYR+AiZwdnkJDDeJsiY4s2gXs2HWj/CnIW/43FZPRSPj79cJGxRptIvUJJC2Q+CsVkgISv3vu3x3GttZfDe0bKZu7SWpskKWekW79KEsgGPUIvZPwA+UDSQc5kHUuRp7xAWIuOkX6FkmU9IomFEuGXVnMpFhFbTPrH+QcUlAQJWcO7Xq+AiJwtspwvLCKJqcgNaIKMiZh7KZGPbYWMrG1AEiJlA30DWeBz/BO+foF8BfkCssPnkUYMInFzqjxdgQPGXgI2IuULZIMPYIPPeQF5h881mPh79BuMV3C/P+CeM7gpMCVkjXa9yJlgjLCtcQghrq3k4j4hS2j0C8hLUcgCeQN5h8/LbOy8wnhHbP9wvw/wuZbrbsWniBBRiEhYoIjIJ0yVckTKBu172ReUvB3mCeQZ+uJcgN8Jcsf1exB5xYzcN+f5l+NThAzREaX7GWWGiCjpOKKki9QVcq4RIe9gPkE+QF5h3ACv4CIkUsScO3BvkXM2hRaYLGRIUWdUXEEi4gKGDJEgXZQc0XKE9gXEI+IdRMgHmG8gRTSIhA0UUXGPpRZu61Bm4uYa4ojoC7zHM4K+BvMEhgjZoIgQGeIZPh8RF+AizXLNc1AvOQTIuFRa2uKUtbRCR1d0nAsfUdIF5BVkDZMLuEQIiBhYGURIlHWUECGeMWA/cR/9xtTJOAStjCspK1rHi3pJQSJDJEjXZKzAiJAFFBFQ8gRtWd9ZoFzP4TpSPFLAnMN+A53TuF0qHQXQRRvdO+gSRcoc5nmc5GUOZYHyDF/gOlLiGgTm2MFvOUyV8lMh3vewZXlOyoxIEdEMpkSILPBxa4FuDQN2EwuZcR5bw36ajOHp6iej5RbVEPmhNLK3kq6fZ5SlfjQpw9PVT0bLPKRb9nrzujFoTVkckIemrJ/MkHu0cDsWLkUw5WGJDJPRss28Z0f8TxsQdG/CMkPu0cI9XPz9D2yPmz1wM2WekmG7Z5zR7hbSWluZQ8ZvtN3jNovcLYS6jMPuGWfcPWVRl/HQPeMMUtaGJmGTshrDVwiPjKWPeRz5CmGRsZT/CWSFMJCx1P0mfIUwyVitfYXwFsLCH4ZMJMqrECZQIfygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGZGfKL3/q4swAr39/hNmTbFhqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZ/gNURQWtOJ4VhQAAAABJRU5ErkJggg==') repeat top left;
+  background: #000
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8yOS8xMiKqq3kAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAFBklEQVR4nO2a23LbMAxEF5LtNP//sW2dttOLKdkPGWxISRSF7QbZncGAV9XxCuyClNT7+/s7MYbzp3YAE4YKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBm+OV9oLXWbq21F8/jpmma3lprf733b5zjh85P79C8tbY0tD3vXPtprR3ixyjkiXNrrW3vEIL2Y9nfWvsbdL0HKcgZxS/gvoCrpAfJCfCNJXdE8Ys3iF9I1gXlIFSQLEbIC9oPJGUHeYOYR+AiZwdnkJDDeJsiY4s2gXs2HWj/CnIW/43FZPRSPj79cJGxRptIvUJJC2Q+CsVkgISv3vu3x3GttZfDe0bKZu7SWpskKWekW79KEsgGPUIvZPwA+UDSQc5kHUuRp7xAWIuOkX6FkmU9IomFEuGXVnMpFhFbTPrH+QcUlAQJWcO7Xq+AiJwtspwvLCKJqcgNaIKMiZh7KZGPbYWMrG1AEiJlA30DWeBz/BO+foF8BfkCssPnkUYMInFzqjxdgQPGXgI2IuULZIMPYIPPeQF5h881mPh79BuMV3C/P+CeM7gpMCVkjXa9yJlgjLCtcQghrq3k4j4hS2j0C8hLUcgCeQN5h8/LbOy8wnhHbP9wvw/wuZbrbsWniBBRiEhYoIjIJ0yVckTKBu172ReUvB3mCeQZ+uJcgN8Jcsf1exB5xYzcN+f5l+NThAzREaX7GWWGiCjpOKKki9QVcq4RIe9gPkE+QF5h3ACv4CIkUsScO3BvkXM2hRaYLGRIUWdUXEEi4gKGDJEgXZQc0XKE9gXEI+IdRMgHmG8gRTSIhA0UUXGPpRZu61Bm4uYa4ojoC7zHM4K+BvMEhgjZoIgQGeIZPh8RF+AizXLNc1AvOQTIuFRa2uKUtbRCR1d0nAsfUdIF5BVkDZMLuEQIiBhYGURIlHWUECGeMWA/cR/9xtTJOAStjCspK1rHi3pJQSJDJEjXZKzAiJAFFBFQ8gRtWd9ZoFzP4TpSPFLAnMN+A53TuF0qHQXQRRvdO+gSRcoc5nmc5GUOZYHyDF/gOlLiGgTm2MFvOUyV8lMh3vewZXlOyoxIEdEMpkSILPBxa4FuDQN2EwuZcR5bw36ajOHp6iej5RbVEPmhNLK3kq6fZ5SlfjQpw9PVT0bLPKRb9nrzujFoTVkckIemrJ/MkHu0cDsWLkUw5WGJDJPRss28Z0f8TxsQdG/CMkPu0cI9XPz9D2yPmz1wM2WekmG7Z5zR7hbSWluZQ8ZvtN3jNovcLYS6jMPuGWfcPWVRl/HQPeMMUtaGJmGTshrDVwiPjKWPeRz5CmGRsZT/CWSFMJCx1P0mfIUwyVitfYXwFsLCH4ZMJMqrECZQIfygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGZGfKL3/q4swAr39/hNmTbFhqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZ/gNURQWtOJ4VhQAAAABJRU5ErkJggg==")
+    repeat top left;
 }
 
 .twinkling {
-  background: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8yOS8xMiKqq3kAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAFBklEQVR4nO2a23LbMAxEF5LtNP//sW2dttOLKdkPGWxISRSF7QbZncGAV9XxCuyClNT7+/s7MYbzp3YAE4YKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBm+OV9oLXWbq21F8/jpmma3lprf733b5zjh85P79C8tbY0tD3vXPtprR3ixyjkiXNrrW3vEIL2Y9nfWvsbdL0HKcgZxS/gvoCrpAfJCfCNJXdE8Ys3iF9I1gXlIFSQLEbIC9oPJGUHeYOYR+AiZwdnkJDDeJsiY4s2gXs2HWj/CnIW/43FZPRSPj79cJGxRptIvUJJC2Q+CsVkgISv3vu3x3GttZfDe0bKZu7SWpskKWekW79KEsgGPUIvZPwA+UDSQc5kHUuRp7xAWIuOkX6FkmU9IomFEuGXVnMpFhFbTPrH+QcUlAQJWcO7Xq+AiJwtspwvLCKJqcgNaIKMiZh7KZGPbYWMrG1AEiJlA30DWeBz/BO+foF8BfkCssPnkUYMInFzqjxdgQPGXgI2IuULZIMPYIPPeQF5h881mPh79BuMV3C/P+CeM7gpMCVkjXa9yJlgjLCtcQghrq3k4j4hS2j0C8hLUcgCeQN5h8/LbOy8wnhHbP9wvw/wuZbrbsWniBBRiEhYoIjIJ0yVckTKBu172ReUvB3mCeQZ+uJcgN8Jcsf1exB5xYzcN+f5l+NThAzREaX7GWWGiCjpOKKki9QVcq4RIe9gPkE+QF5h3ACv4CIkUsScO3BvkXM2hRaYLGRIUWdUXEEi4gKGDJEgXZQc0XKE9gXEI+IdRMgHmG8gRTSIhA0UUXGPpRZu61Bm4uYa4ojoC7zHM4K+BvMEhgjZoIgQGeIZPh8RF+AizXLNc1AvOQTIuFRa2uKUtbRCR1d0nAsfUdIF5BVkDZMLuEQIiBhYGURIlHWUECGeMWA/cR/9xtTJOAStjCspK1rHi3pJQSJDJEjXZKzAiJAFFBFQ8gRtWd9ZoFzP4TpSPFLAnMN+A53TuF0qHQXQRRvdO+gSRcoc5nmc5GUOZYHyDF/gOlLiGgTm2MFvOUyV8lMh3vewZXlOyoxIEdEMpkSILPBxa4FuDQN2EwuZcR5bw36ajOHp6iej5RbVEPmhNLK3kq6fZ5SlfjQpw9PVT0bLPKRb9nrzujFoTVkckIemrJ/MkHu0cDsWLkUw5WGJDJPRss28Z0f8TxsQdG/CMkPu0cI9XPz9D2yPmz1wM2WekmG7Z5zR7hbSWluZQ8ZvtN3jNovcLYS6jMPuGWfcPWVRl/HQPeMMUtaGJmGTshrDVwiPjKWPeRz5CmGRsZT/CWSFMJCx1P0mfIUwyVitfYXwFsLCH4ZMJMqrECZQIfygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGZGfKL3/q4swAr39/hNmTbFhqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZ/gNURQWtOJ4VhQAAAABJRU5ErkJggg==') repeat top left;
+  background: transparent
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8yOS8xMiKqq3kAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAFBklEQVR4nO2a23LbMAxEF5LtNP//sW2dttOLKdkPGWxISRSF7QbZncGAV9XxCuyClNT7+/s7MYbzp3YAE4YKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBm+OV9oLXWbq21F8/jpmma3lprf733b5zjh85P79C8tbY0tD3vXPtprR3ixyjkiXNrrW3vEIL2Y9nfWvsbdL0HKcgZxS/gvoCrpAfJCfCNJXdE8Ys3iF9I1gXlIFSQLEbIC9oPJGUHeYOYR+AiZwdnkJDDeJsiY4s2gXs2HWj/CnIW/43FZPRSPj79cJGxRptIvUJJC2Q+CsVkgISv3vu3x3GttZfDe0bKZu7SWpskKWekW79KEsgGPUIvZPwA+UDSQc5kHUuRp7xAWIuOkX6FkmU9IomFEuGXVnMpFhFbTPrH+QcUlAQJWcO7Xq+AiJwtspwvLCKJqcgNaIKMiZh7KZGPbYWMrG1AEiJlA30DWeBz/BO+foF8BfkCssPnkUYMInFzqjxdgQPGXgI2IuULZIMPYIPPeQF5h881mPh79BuMV3C/P+CeM7gpMCVkjXa9yJlgjLCtcQghrq3k4j4hS2j0C8hLUcgCeQN5h8/LbOy8wnhHbP9wvw/wuZbrbsWniBBRiEhYoIjIJ0yVckTKBu172ReUvB3mCeQZ+uJcgN8Jcsf1exB5xYzcN+f5l+NThAzREaX7GWWGiCjpOKKki9QVcq4RIe9gPkE+QF5h3ACv4CIkUsScO3BvkXM2hRaYLGRIUWdUXEEi4gKGDJEgXZQc0XKE9gXEI+IdRMgHmG8gRTSIhA0UUXGPpRZu61Bm4uYa4ojoC7zHM4K+BvMEhgjZoIgQGeIZPh8RF+AizXLNc1AvOQTIuFRa2uKUtbRCR1d0nAsfUdIF5BVkDZMLuEQIiBhYGURIlHWUECGeMWA/cR/9xtTJOAStjCspK1rHi3pJQSJDJEjXZKzAiJAFFBFQ8gRtWd9ZoFzP4TpSPFLAnMN+A53TuF0qHQXQRRvdO+gSRcoc5nmc5GUOZYHyDF/gOlLiGgTm2MFvOUyV8lMh3vewZXlOyoxIEdEMpkSILPBxa4FuDQN2EwuZcR5bw36ajOHp6iej5RbVEPmhNLK3kq6fZ5SlfjQpw9PVT0bLPKRb9nrzujFoTVkckIemrJ/MkHu0cDsWLkUw5WGJDJPRss28Z0f8TxsQdG/CMkPu0cI9XPz9D2yPmz1wM2WekmG7Z5zR7hbSWluZQ8ZvtN3jNovcLYS6jMPuGWfcPWVRl/HQPeMMUtaGJmGTshrDVwiPjKWPeRz5CmGRsZT/CWSFMJCx1P0mfIUwyVitfYXwFsLCH4ZMJMqrECZQIfygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZVAgzqBBmUCHMoEKYQYUwgwphBhXCDCqEGZGfKL3/q4swAr39/hNmTbFhqBBmUCHMoEKYQYUwgwphBhXCDCqEGVQIM6gQZlAhzKBCmEGFMIMKYQYVwgwqhBlUCDOoEGZQIcygQphBhTCDCmEGFcIMKoQZ/gNURQWtOJ4VhQAAAABJRU5ErkJggg==")
+    repeat top left;
   animation: twinkle 300s linear infinite;
 }
 
 @keyframes twinkle {
-  from { background-position: 0 0; }
-  to { background-position: -10000px 5000px; }
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
 }
 
 .battle-container {
@@ -61,7 +71,7 @@ body {
   padding: 30px;
   background-color: rgba(0, 0, 0, 0.85);
   color: #fff;
-  font-family: 'Pathway Gothic One', sans-serif;
+  font-family: "Pathway Gothic One", sans-serif;
   border: 3px solid var(--star-wars-yellow);
   box-shadow: 0 0 30px var(--star-wars-yellow-glow);
   border-radius: 12px;
@@ -83,7 +93,7 @@ body {
 
 .title-shadow {
   display: block;
-  font-family: 'Star Jedi', sans-serif;
+  font-family: "Star Jedi", sans-serif;
   font-size: 3.5rem;
   color: var(--star-wars-yellow);
   text-shadow: 0 0 15px var(--star-wars-yellow-glow);
@@ -91,7 +101,7 @@ body {
 
 .title-main {
   display: block;
-  font-family: 'Star Jedi', sans-serif;
+  font-family: "Star Jedi", sans-serif;
   font-size: 2rem;
   color: var(--star-wars-yellow);
   transform: translateY(-10px);
@@ -105,7 +115,12 @@ body {
   left: 25%;
   width: 50%;
   height: 3px;
-  background: linear-gradient(90deg, transparent, var(--star-wars-yellow), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--star-wars-yellow),
+    transparent
+  );
   border-radius: 2px;
 }
 
@@ -155,11 +170,13 @@ body {
   transform: translateX(-50%);
   width: 70%;
   height: 3px;
-  background: linear-gradient(90deg,
-  transparent 0%,
-  var(--star-wars-yellow) 20%,
-  var(--star-wars-yellow) 80%,
-  transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--star-wars-yellow) 20%,
+    var(--star-wars-yellow) 80%,
+    transparent 100%
+  );
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -170,9 +187,15 @@ body {
 }
 
 @keyframes lightsaber-glow {
-  0% { opacity: 0.4; }
-  50% { opacity: 1; }
-  100% { opacity: 0.4; }
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
 }
 
 /* Loading indicator */
@@ -185,11 +208,13 @@ body {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%,
-  var(--star-wars-light-gray) 5%,
-  var(--star-wars-dark-gray) 6%,
-  var(--star-wars-dark-gray) 94%,
-  var(--star-wars-light-gray) 95%);
+  background: radial-gradient(
+    circle at 30% 30%,
+    var(--star-wars-light-gray) 5%,
+    var(--star-wars-dark-gray) 6%,
+    var(--star-wars-dark-gray) 94%,
+    var(--star-wars-light-gray) 95%
+  );
   position: relative;
   margin: 0 auto 20px;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
@@ -220,8 +245,12 @@ body {
 }
 
 @keyframes rotate-loader {
-  0% { transform: rotate(0); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-indicator p {
@@ -236,10 +265,18 @@ body {
 }
 
 @keyframes dots {
-  0% { content: '.'; }
-  33% { content: '..'; }
-  66% { content: '...'; }
-  100% { content: '.'; }
+  0% {
+    content: ".";
+  }
+  33% {
+    content: "..";
+  }
+  66% {
+    content: "...";
+  }
+  100% {
+    content: ".";
+  }
 }
 
 /* Battle Arena */
@@ -247,7 +284,6 @@ body {
   justify-content: center;
   gap: 20px;
 }
-
 
 /* Character Cards */
 .character-card {
@@ -265,7 +301,12 @@ body {
   left: 0;
   width: 100%;
   height: 5px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
 }
 
 .character-card[data-side="light"] {
@@ -274,7 +315,12 @@ body {
 }
 
 .character-card[data-side="light"]::before {
-  background: linear-gradient(90deg, transparent, var(--light-side-blue-glow), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--light-side-blue-glow),
+    transparent
+  );
 }
 
 .character-card[data-side="dark"] {
@@ -283,7 +329,12 @@ body {
 }
 
 .character-card[data-side="dark"]::before {
-  background: linear-gradient(90deg, transparent, var(--dark-side-red-glow), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--dark-side-red-glow),
+    transparent
+  );
 }
 
 .character-card.active-turn {
@@ -311,8 +362,14 @@ body {
 }
 
 @keyframes victory-pulse {
-  0% { transform: scale(1); box-shadow: 0 0 15px var(--star-wars-yellow-glow); }
-  100% { transform: scale(1.03); box-shadow: 0 0 30px var(--star-wars-yellow-glow); }
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 15px var(--star-wars-yellow-glow);
+  }
+  100% {
+    transform: scale(1.03);
+    box-shadow: 0 0 30px var(--star-wars-yellow-glow);
+  }
 }
 
 /* Character Image */
@@ -395,8 +452,12 @@ body {
 }
 
 @keyframes glow-pulse {
-  0% { opacity: 0.3; }
-  100% { opacity: 0.8; }
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.8;
+  }
 }
 
 /* Character Name */
@@ -418,7 +479,12 @@ body {
   left: 25%;
   width: 50%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--star-wars-yellow), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--star-wars-yellow),
+    transparent
+  );
 }
 
 /* Health Bar */
@@ -434,15 +500,19 @@ body {
   overflow: hidden;
   position: relative;
   border: 1px solid var(--star-wars-yellow);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 0 10px rgba(0, 0, 0, 0.3),
+    inset 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .health-fill {
   height: 100%;
-  background: linear-gradient(90deg,
-  var(--dark-side-red) 0%,
-  var(--rebel-orange) 50%,
-  var(--star-wars-yellow) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--dark-side-red) 0%,
+    var(--rebel-orange) 50%,
+    var(--star-wars-yellow) 100%
+  );
   transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
   border-radius: 12px;
@@ -643,8 +713,12 @@ body {
 }
 
 @keyframes winner-glow {
-  0% { box-shadow: 0 0 20px var(--star-wars-yellow-glow); }
-  100% { box-shadow: 0 0 40px var(--star-wars-yellow-glow); }
+  0% {
+    box-shadow: 0 0 20px var(--star-wars-yellow-glow);
+  }
+  100% {
+    box-shadow: 0 0 40px var(--star-wars-yellow-glow);
+  }
 }
 
 .winner h2 {
@@ -690,8 +764,12 @@ body {
 }
 
 @keyframes confetti-fall {
-  0% { background-position: 0 0; }
-  100% { background-position: 20px 1000px; }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 20px 1000px;
+  }
 }
 
 /* Battle Log */
@@ -722,7 +800,12 @@ body {
   left: 30%;
   width: 40%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--star-wars-yellow), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--star-wars-yellow),
+    transparent
+  );
 }
 
 .battle-log {
@@ -789,8 +872,14 @@ body {
 }
 
 @keyframes new-log {
-  0% { transform: translateX(-20px); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .log-icon {
@@ -856,11 +945,21 @@ body {
 
 /* Animation Styles */
 @keyframes saberSwing {
-  0% { transform: translateZ(0) rotate(0deg); }
-  25% { transform: translateZ(0) rotate(5deg) scale(1.05); }
-  50% { transform: translateZ(0) rotate(-15deg) scale(1.1); }
-  75% { transform: translateZ(0) rotate(10deg) scale(1.05); }
-  100% { transform: translateZ(0) rotate(0deg); }
+  0% {
+    transform: translateZ(0) rotate(0deg);
+  }
+  25% {
+    transform: translateZ(0) rotate(5deg) scale(1.05);
+  }
+  50% {
+    transform: translateZ(0) rotate(-15deg) scale(1.1);
+  }
+  75% {
+    transform: translateZ(0) rotate(10deg) scale(1.05);
+  }
+  100% {
+    transform: translateZ(0) rotate(0deg);
+  }
 }
 
 .attack-animation {
@@ -868,9 +967,18 @@ body {
 }
 
 @keyframes specialAttack {
-  0% { transform: translateZ(0) scale(1); filter: brightness(1); }
-  50% { transform: translateZ(0) scale(1.1); filter: brightness(1.5); }
-  100% { transform: translateZ(0) scale(1); filter: brightness(1); }
+  0% {
+    transform: translateZ(0) scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: translateZ(0) scale(1.1);
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: translateZ(0) scale(1);
+    filter: brightness(1);
+  }
 }
 
 .special-attack {
@@ -878,10 +986,22 @@ body {
 }
 
 @keyframes forcePush {
-  0% { transform: translateZ(0); filter: brightness(1); }
-  20% { transform: translateZ(0) scale(1.1); filter: brightness(1.3); }
-  40% { transform: translateZ(0) translateX(20px); filter: brightness(1); }
-  100% { transform: translateZ(0); filter: brightness(1); }
+  0% {
+    transform: translateZ(0);
+    filter: brightness(1);
+  }
+  20% {
+    transform: translateZ(0) scale(1.1);
+    filter: brightness(1.3);
+  }
+  40% {
+    transform: translateZ(0) translateX(20px);
+    filter: brightness(1);
+  }
+  100% {
+    transform: translateZ(0);
+    filter: brightness(1);
+  }
 }
 
 .push-animation {
@@ -889,9 +1009,15 @@ body {
 }
 
 @keyframes burnEffect {
-  0% { box-shadow: inset 0 0 20px rgba(255, 100, 0, 0); }
-  50% { box-shadow: inset 0 0 50px rgba(255, 100, 0, 0.8); }
-  100% { box-shadow: inset 0 0 20px rgba(255, 100, 0, 0); }
+  0% {
+    box-shadow: inset 0 0 20px rgba(255, 100, 0, 0);
+  }
+  50% {
+    box-shadow: inset 0 0 50px rgba(255, 100, 0, 0.8);
+  }
+  100% {
+    box-shadow: inset 0 0 20px rgba(255, 100, 0, 0);
+  }
 }
 
 .burning-animation {
@@ -905,7 +1031,12 @@ body {
   left: var(--hole-x);
   width: 30px;
   height: 30px;
-  background: radial-gradient(circle, rgba(255,232,31,0.9) 0%, rgba(255,90,31,0.8) 40%, rgba(226,54,54,0) 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 232, 31, 0.9) 0%,
+    rgba(255, 90, 31, 0.8) 40%,
+    rgba(226, 54, 54, 0) 70%
+  );
   border-radius: 50%;
   animation: blasterShot 0.4s ease-out forwards;
   box-shadow: 0 0 20px rgba(255, 232, 31, 0.5);
@@ -927,8 +1058,12 @@ body {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Styles pour les images de personnages */
@@ -997,8 +1132,14 @@ body {
 
 /* Animation de tir de blaster */
 @keyframes blasterShot {
-  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
 }
 
 /* Responsive design */
@@ -1058,18 +1199,18 @@ body {
 /* place log à gauche, arène à droite */
 .battle-main {
   display: flex;
-  align-items: flex-start;   /* aligne en haut */
-  gap: 20px;                  /* espace entre log et arène */
+  align-items: flex-start; /* aligne en haut */
+  gap: 20px; /* espace entre log et arène */
 }
 
 .battle-log-container {
-  order: 1;                   /* première colonne */
-  flex: 0 0 30%;              /* prend 30% de la largeur */
+  order: 1; /* première colonne */
+  flex: 0 0 30%; /* prend 30% de la largeur */
 }
 
 .battle-arena {
-  order: 2;                   /* deuxième colonne */
-  flex: 1;                    /* prend le reste */
+  order: 2; /* deuxième colonne */
+  flex: 1; /* prend le reste */
 }
 
 /* adaptation responsive */
@@ -1088,12 +1229,12 @@ body {
 
 /* 1) Fixe la largeur du log à 300px (ou ce qui vous convient) */
 .battle-main .battle-log-container {
-  flex: 0 0 300px;  /* largeur fixe */
+  flex: 0 0 300px; /* largeur fixe */
 }
 
 /* 2) Réduit la taille des character-card */
 .battle-main .battle-arena .character-card {
-  flex: 0 1 35%;    /* passe de 45% à 35% de l'espace disponible */
+  flex: 0 1 35%; /* passe de 45% à 35% de l'espace disponible */
   max-width: 260px; /* largeur max pour éviter qu'elles grandissent trop */
 }
 
@@ -1109,7 +1250,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.75);
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1159,7 +1300,8 @@ body {
 }
 
 /* Style pour les listes de compétences */
-.skills-list, .weaknesses-list {
+.skills-list,
+.weaknesses-list {
   max-height: 80px;
   overflow-y: auto;
   margin: 5px 0;
@@ -1167,7 +1309,8 @@ body {
   font-size: 0.85rem;
 }
 
-.skills-list li, .weaknesses-list li {
+.skills-list li,
+.weaknesses-list li {
   margin-bottom: 3px;
 }
 

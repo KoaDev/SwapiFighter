@@ -4,7 +4,8 @@
   <button
     (click)="restartBattle()"
     [disabled]="battleInProgress()"
-    class="battle-button">
+    class="battle-button"
+  >
     @if (loading()) {
       Préparation du combat...
     } @else if (battleInProgress()) {
@@ -32,11 +33,13 @@
             <div
               class="log-entry"
               [ngClass]="{
-                'attack':     entry.includes('attaque') || entry.includes('utilise'),
-                'special':    entry.includes('spécial') || entry.includes('déploiement'),
-                'critical':   entry.includes('CRITIQUE'),
-                'status':     entry.includes('points de vie')
-              }">
+                attack: entry.includes('attaque') || entry.includes('utilise'),
+                special:
+                  entry.includes('spécial') || entry.includes('déploiement'),
+                critical: entry.includes('CRITIQUE'),
+                status: entry.includes('points de vie'),
+              }"
+            >
               {{ entry }}
             </div>
           }
@@ -52,12 +55,14 @@
           [class.active-turn]="currentAttacker() === 'dev1'"
           [class.defeated]="dev1().health <= 0"
           [class.victorious]="winner() === dev1()"
-          [ngClass]="animationClassDev1()">
+          [ngClass]="animationClassDev1()"
+        >
           <div class="character-image">
             <img
               [src]="dev1().avatar"
               (error)="dev1().avatar = 'assets/img/default-dev.png'"
-              [alt]="dev1().name">
+              [alt]="dev1().name"
+            />
           </div>
           <h2>{{ dev1().name }}</h2>
           <div class="health-bar">
@@ -80,7 +85,7 @@
             </ul>
           </div>
           <p class="character-side">
-            {{ dev1().side === 'light' ? 'Côté lumineux' : 'Côté obscur' }}
+            {{ dev1().side === "light" ? "Côté lumineux" : "Côté obscur" }}
           </p>
           <p class="catchphrase">"{{ dev1().catchphrase }}"</p>
         </div>
@@ -96,12 +101,14 @@
           [class.active-turn]="currentAttacker() === 'dev2'"
           [class.defeated]="dev2().health <= 0"
           [class.victorious]="winner() === dev2()"
-          [ngClass]="animationClassDev2()">
+          [ngClass]="animationClassDev2()"
+        >
           <div class="character-image">
             <img
               [src]="dev2().avatar"
               (error)="dev2().avatar = 'assets/img/default-dev.png'"
-              [alt]="dev2().name">
+              [alt]="dev2().name"
+            />
           </div>
           <h2>{{ dev2().name }}</h2>
           <div class="health-bar">
@@ -124,7 +131,7 @@
             </ul>
           </div>
           <p class="character-side">
-            {{ dev2().side === 'light' ? 'Côté lumineux' : 'Côté obscur' }}
+            {{ dev2().side === "light" ? "Côté lumineux" : "Côté obscur" }}
           </p>
           <p class="catchphrase">"{{ dev2().catchphrase }}"</p>
         </div>
@@ -138,7 +145,10 @@
       <div class="modal">
         <h2>Vainqueur !</h2>
         <p class="winner-name">{{ winner()!.name }}</p>
-        <p>Avec <strong>{{ winner()!.health }}%</strong> de points de vie restants</p>
+        <p>
+          Avec <strong>{{ winner()!.health }}%</strong> de points de vie
+          restants
+        </p>
         <button class="modal-close" (click)="closeWinnerModal()">Fermer</button>
       </div>
     </div>
@@ -146,7 +156,13 @@
 
   <div class="real-about">
     <h2>En réalité...</h2>
-    <p>Nous sommes deux développeurs passionnés qui avons créé ce projet Star Wars pour montrer nos compétences en Angular.</p>
-    <p>Ce duel est bien sûr fictif - en réalité nous collaborons parfaitement ensemble!</p>
+    <p>
+      Nous sommes deux développeurs passionnés qui avons créé ce projet Star
+      Wars pour montrer nos compétences en Angular.
+    </p>
+    <p>
+      Ce duel est bien sûr fictif - en réalité nous collaborons parfaitement
+      ensemble!
+    </p>
   </div>
 </div>

@@ -8,7 +8,7 @@ import { NavigationComponent } from './navigation/navigation.component';
   standalone: true,
   imports: [CommonModule, RouterOutlet, NavigationComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'Star Wars Battle';

@@ -4,7 +4,10 @@ import { forkJoin } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { SwapiService } from '../core/services/swapi.service';
 import { BattleService } from '../core/services/battle.service';
-import {BattleHistoryEntry, StorageService} from '../core/services/storage.service';
+import {
+  BattleHistoryEntry,
+  StorageService,
+} from '../core/services/storage.service';
 import { Character } from '../core/models/character';
 
 @Component({
@@ -12,7 +15,7 @@ import { Character } from '../core/models/character';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './battle.component.html',
-  styleUrls: ['./battle.component.css']
+  styleUrls: ['./battle.component.css'],
 })
 export class BattleComponent implements OnInit {
   // Utilisation des signals pour une meilleure réactivité
@@ -47,12 +50,12 @@ export class BattleComponent implements OnInit {
     blaster: new Audio('assets/sounds/blaster.mp3'),
     force: new Audio('assets/sounds/force.mp3'),
     victory: new Audio('assets/sounds/victory.mp3'),
-    defeat: new Audio('assets/sounds/defeat.mp3')
+    defeat: new Audio('assets/sounds/defeat.mp3'),
   };
 
   ngOnInit(): void {
     // Précharger les sons pour éviter les délais
-    Object.values(this.sounds).forEach(sound => {
+    Object.values(this.sounds).forEach((sound) => {
       sound.load();
       sound.volume = 0.5;
     });
@@ -78,7 +81,9 @@ export class BattleComponent implements OnInit {
       const sound = this.sounds[soundType];
       sound.pause();
       sound.currentTime = 0;
-      sound.play().catch(err => console.log('Erreur de lecture audio :', err));
+      sound
+        .play()
+        .catch((err) => console.log('Erreur de lecture audio :', err));
     }
   }
 
@@ -88,7 +93,7 @@ export class BattleComponent implements OnInit {
 
     forkJoin([
       this.swapiService.getRandomCharacter(),
-      this.swapiService.getRandomCharacter()
+      this.swapiService.getRandomCharacter(),
     ])
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
@@ -109,34 +114,44 @@ export class BattleComponent implements OnInit {
 
           const updatedLog = [...this.battleLog()];
           updatedLog.push(
-            `${firstAttacker === 'character1' ? char1.name : char2.name} commence l'attaque !`
+            `${firstAttacker === 'character1' ? char1.name : char2.name} commence l'attaque !`,
           );
           this.battleLog.set(updatedLog);
 
           this.battleInProgress.set(true);
           setTimeout(() => this.nextTurn(), 1000);
         },
-        error: err => {
+        error: (err) => {
           console.error('Erreur lors du chargement des personnages', err);
           const errorLog = [...this.battleLog()];
-          errorLog.push("Erreur lors du chargement des personnages de la galaxie.");
+          errorLog.push(
+            'Erreur lors du chargement des personnages de la galaxie.',
+          );
           this.battleLog.set(errorLog);
           this.battleInProgress.set(false);
-        }
+        },
       });
   }
 
   private assignCharacterDetails(character: Character): void {
     const forceSensitiveNames = [
-      'Luke Skywalker', 'Darth Vader', 'Obi-Wan Kenobi',
-      'Yoda', 'Palpatine', 'Rey', 'Kylo Ren'
+      'Luke Skywalker',
+      'Darth Vader',
+      'Obi-Wan Kenobi',
+      'Yoda',
+      'Palpatine',
+      'Rey',
+      'Kylo Ren',
     ];
     const lightSide = ['Luke Skywalker', 'Obi-Wan Kenobi', 'Yoda', 'Rey'];
     const darkSide = ['Darth Vader', 'Palpatine', 'Kylo Ren'];
 
     const isForce = forceSensitiveNames.includes(character.name);
     let mainWeapon = 'Blaster';
-    if (lightSide.includes(character.name) || darkSide.includes(character.name)) {
+    if (
+      lightSide.includes(character.name) ||
+      darkSide.includes(character.name)
+    ) {
       mainWeapon = 'Sabre Laser';
     } else if (character.name === 'Chewbacca') {
       mainWeapon = 'Arbalète Wookiee';
@@ -155,7 +170,7 @@ export class BattleComponent implements OnInit {
 
   private determineFirstAttacker(
     char1: Character,
-    char2: Character
+    char2: Character,
   ): 'character1' | 'character2' {
     if (char1.forceSensitive && !char2.forceSensitive) {
       return 'character1';
@@ -193,7 +208,9 @@ export class BattleComponent implements OnInit {
     if (status.finished) {
       this.winner.set(status.winner || null);
       const finalLog = [...this.battleLog()];
-      finalLog.push(`Le combat est terminé ! ${this.winner()?.name} remporte la victoire !`);
+      finalLog.push(
+        `Le combat est terminé ! ${this.winner()?.name} remporte la victoire !`,
+      );
       this.battleLog.set(finalLog);
       this.battleInProgress.set(false);
       this.saveBattleData();
@@ -220,7 +237,9 @@ export class BattleComponent implements OnInit {
     if (result.specialEffect) {
       turnLog.push(result.specialEffect);
     }
-    turnLog.push(`${defender.name} a ${defender.health} points de vie restants.`);
+    turnLog.push(
+      `${defender.name} a ${defender.health} points de vie restants.`,
+    );
     this.battleLog.set(turnLog);
 
     let animClass: string;
@@ -254,8 +273,8 @@ export class BattleComponent implements OnInit {
 
   private saveBattleData(): void {
     const winnerChar = this.winner();
-    const char1       = this.character1();
-    const char2       = this.character2();
+    const char1 = this.character1();
+    const char2 = this.character2();
     if (!winnerChar || !char1 || !char2) return;
 
     const battleData: BattleHistoryEntry = {
@@ -265,26 +284,25 @@ export class BattleComponent implements OnInit {
       winnerSide: winnerChar.side || 'neutral',
       characters: [
         {
-          name:       char1.name,
-          powerScore: char1.powerScore!,            // assertion non-null
-          side:       char1.side || 'neutral',
-          weapon:     char1.mainWeapon!             // assertion non-null
+          name: char1.name,
+          powerScore: char1.powerScore!, // assertion non-null
+          side: char1.side || 'neutral',
+          weapon: char1.mainWeapon!, // assertion non-null
         },
         {
-          name:       char2.name,
+          name: char2.name,
           powerScore: char2.powerScore!,
-          side:       char2.side || 'neutral',
-          weapon:     char2.mainWeapon!
-        }
+          side: char2.side || 'neutral',
+          weapon: char2.mainWeapon!,
+        },
       ],
-      log:      this.battleLog(),
-      duration: this.battleLog().length
+      log: this.battleLog(),
+      duration: this.battleLog().length,
     };
 
     this.storageService.saveBattleHistory(battleData);
     this.storageService.updateRanking(winnerChar);
   }
-
 
   getCharacterId(url: string): string {
     const match = url.match(/\/(\d+)\/$/);
@@ -306,7 +324,7 @@ export class BattleComponent implements OnInit {
   }
   triggerAnimation(
     character: 'character1' | 'character2',
-    animClass: string
+    animClass: string,
   ): void {
     if (character === 'character1') {
       this.animationClassCharacter1.set(animClass);
@@ -317,17 +335,17 @@ export class BattleComponent implements OnInit {
     }
   }
   toggleSound(): void {
-    this.soundEnabled.update(v => !v);
+    this.soundEnabled.update((v) => !v);
     localStorage.setItem('soundEnabled', this.soundEnabled().toString());
   }
 
   toggleFullscreen(): void {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(err => {
+      document.documentElement.requestFullscreen().catch((err) => {
         console.log(`Error attempting to enable fullscreen: ${err.message}`);
       });
     } else if (document.exitFullscreen) {
-      document.exitFullscreen().catch(err => {
+      document.exitFullscreen().catch((err) => {
         console.log(`Error attempting to exit fullscreen: ${err.message}`);
       });
     }

@@ -19,7 +19,7 @@ interface DevCharacter {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css']
+  styleUrls: ['./about.component.css'],
 })
 export class AboutComponent {
   private battleService = inject(BattleService);
@@ -33,7 +33,7 @@ export class AboutComponent {
     health: 100,
     avatar: 'assets/img/dev/max.jpeg',
     side: 'light',
-    catchphrase: 'May the code be with you!'
+    catchphrase: 'May the code be with you!',
   });
 
   dev2 = signal<DevCharacter>({
@@ -45,7 +45,7 @@ export class AboutComponent {
     health: 100,
     avatar: 'assets/img/dev/fabio.jpeg',
     side: 'dark',
-    catchphrase: 'I find your lack of tests disturbing!'
+    catchphrase: 'I find your lack of tests disturbing!',
   });
 
   battleLog = signal<string[]>([]);
@@ -74,7 +74,7 @@ export class AboutComponent {
 
       const updatedLog = [...this.battleLog()];
       updatedLog.push(
-        `${firstAttacker === 'dev1' ? this.dev1().name : this.dev2().name} commence l'attaque !`
+        `${firstAttacker === 'dev1' ? this.dev1().name : this.dev2().name} commence l'attaque !`,
       );
       this.battleLog.set(updatedLog);
 
@@ -112,8 +112,10 @@ export class AboutComponent {
       return;
     }
 
-    const attacker = this.currentAttacker() === 'dev1' ? this.dev1() : this.dev2();
-    const defender = this.currentAttacker() === 'dev1' ? this.dev2() : this.dev1();
+    const attacker =
+      this.currentAttacker() === 'dev1' ? this.dev1() : this.dev2();
+    const defender =
+      this.currentAttacker() === 'dev1' ? this.dev2() : this.dev1();
 
     // Effectuer l'attaque
     const attack = this.performAttack(attacker, defender);
@@ -124,7 +126,9 @@ export class AboutComponent {
     if (attack.specialEffect) {
       turnLog.push(attack.specialEffect);
     }
-    turnLog.push(`${defender.name} a ${defender.health} points de vie restants.`);
+    turnLog.push(
+      `${defender.name} a ${defender.health} points de vie restants.`,
+    );
     this.battleLog.set(turnLog);
 
     // Animation
@@ -137,7 +141,9 @@ export class AboutComponent {
     }
 
     // Changer d'attaquant pour le prochain tour
-    this.currentAttacker.set(this.currentAttacker() === 'dev1' ? 'dev2' : 'dev1');
+    this.currentAttacker.set(
+      this.currentAttacker() === 'dev1' ? 'dev2' : 'dev1',
+    );
 
     // Passer au tour suivant après un délai
     setTimeout(() => this.nextTurn(), this.combatSpeed());
@@ -145,18 +151,28 @@ export class AboutComponent {
 
   private performAttack(
     attacker: DevCharacter,
-    defender: DevCharacter
+    defender: DevCharacter,
   ): { message: string; specialEffect?: string } {
     // Types d'attaques spécifiques aux devs
     const attacks = [
       { name: 'Push de code', damage: 15, effect: 'merge conflict' },
-      { name: 'Revue de code', damage: 20, effect: 'commentaires sarcastiques' },
+      {
+        name: 'Revue de code',
+        damage: 20,
+        effect: 'commentaires sarcastiques',
+      },
       { name: 'Refactoring', damage: 25, effect: 'code illisible' },
-      { name: 'Déploiement nocturne', damage: 30, effect: 'site en maintenance' }
+      {
+        name: 'Déploiement nocturne',
+        damage: 30,
+        effect: 'site en maintenance',
+      },
     ];
 
     const selectedAttack = attacks[Math.floor(Math.random() * attacks.length)];
-    const damage = Math.floor(selectedAttack.damage * (attacker.powerLevel / 100));
+    const damage = Math.floor(
+      selectedAttack.damage * (attacker.powerLevel / 100),
+    );
     defender.health -= damage;
 
     // Utilisation de const au lieu de let
@@ -164,10 +180,11 @@ export class AboutComponent {
 
     return {
       message,
-      specialEffect: selectedAttack.effect ? `→ ${selectedAttack.effect}` : undefined
+      specialEffect: selectedAttack.effect
+        ? `→ ${selectedAttack.effect}`
+        : undefined,
     };
   }
-
 
   private endBattle(): void {
     this.battleInProgress.set(false);
@@ -175,7 +192,9 @@ export class AboutComponent {
     this.winner.set(winner);
 
     const finalLog = [...this.battleLog()];
-    finalLog.push(`Le combat est terminé ! ${winner.name} remporte la victoire !`);
+    finalLog.push(
+      `Le combat est terminé ! ${winner.name} remporte la victoire !`,
+    );
     this.battleLog.set(finalLog);
   }
 

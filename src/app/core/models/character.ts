@@ -15,5 +15,5 @@ export interface Character {
   forceSensitive?: boolean;
   powerScore?: number;
   health: number;
-  attributes?: { strength: number; agility: number; intelligence: number; };
+  attributes?: { strength: number; agility: number; intelligence: number };
 }

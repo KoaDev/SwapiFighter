@@ -70,7 +70,9 @@
   border-radius: 8px;
   border: 1px solid #333;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   color: #ffffff;
 }
 
@@ -95,11 +97,11 @@
 }
 
 .universe-card.planet {
-  border-left: 4px solid #4CAF50; /* Vert pour les planètes */
+  border-left: 4px solid #4caf50; /* Vert pour les planètes */
 }
 
 .universe-card.starship {
-  border-left: 4px solid #2196F3; /* Bleu pour les vaisseaux */
+  border-left: 4px solid #2196f3; /* Bleu pour les vaisseaux */
 }
 
 .loading {
@@ -111,12 +113,18 @@
 
 /* Animation pour le loading */
 @keyframes pulse {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.6; }
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
 }
 
 .loading::after {
-  content: '...';
+  content: "...";
   animation: pulse 1.5s infinite;
 }

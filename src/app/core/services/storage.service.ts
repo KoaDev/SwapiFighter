@@ -60,7 +60,7 @@ export interface RankingEntry {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
   /**
@@ -70,9 +70,9 @@ export class StorageService {
   saveBattleHistory(battleData: BattleHistoryEntry): void {
     const history = this.getBattleHistory();
     history.push(battleData);
-    const raw: RawBattleHistoryEntry[] = history.map(entry => ({
+    const raw: RawBattleHistoryEntry[] = history.map((entry) => ({
       ...entry,
-      date: entry.date.toISOString()
+      date: entry.date.toISOString(),
     }));
     localStorage.setItem('battleHistory', JSON.stringify(raw));
   }
@@ -84,9 +84,9 @@ export class StorageService {
   getBattleHistory(): BattleHistoryEntry[] {
     const raw = localStorage.getItem('battleHistory') || '[]';
     const parsed = JSON.parse(raw) as RawBattleHistoryEntry[];
-    return parsed.map(entry => ({
+    return parsed.map((entry) => ({
       ...entry,
-      date: new Date(entry.date)
+      date: new Date(entry.date),
     }));
   }
 
@@ -96,7 +96,7 @@ export class StorageService {
    */
   updateRanking(winner: Character): void {
     const ranking = this.getRanking();
-    const existing = ranking.find(r => r.name === winner.name);
+    const existing = ranking.find((r) => r.name === winner.name);
 
     if (existing) {
       existing.wins++;
@@ -106,13 +106,13 @@ export class StorageService {
         name: winner.name,
         wins: 1,
         lastWin: new Date(),
-        powerScore: winner.powerScore!
+        powerScore: winner.powerScore!,
       });
     }
 
-    const raw: RawRankingEntry[] = ranking.map(r => ({
+    const raw: RawRankingEntry[] = ranking.map((r) => ({
       ...r,
-      lastWin: r.lastWin.toISOString()
+      lastWin: r.lastWin.toISOString(),
     }));
     localStorage.setItem('ranking', JSON.stringify(raw));
   }
@@ -124,9 +124,9 @@ export class StorageService {
   getRanking(): RankingEntry[] {
     const raw = localStorage.getItem('ranking') || '[]';
     const parsed = JSON.parse(raw) as RawRankingEntry[];
-    return parsed.map(entry => ({
+    return parsed.map((entry) => ({
       ...entry,
-      lastWin: new Date(entry.lastWin)
+      lastWin: new Date(entry.lastWin),
     }));
   }
 
