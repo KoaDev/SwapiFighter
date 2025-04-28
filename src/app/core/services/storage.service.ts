@@ -11,12 +11,12 @@ export interface RawBattleHistoryEntry {
   winner: string;
   winnerHealth: number;
   winnerSide: string;
-  characters: Array<{
+  characters: {
     name: string;
     powerScore: number;
     side: string;
     weapon: string;
-  }>;
+  }[];
   log: string[];
   duration: number;
 }
@@ -39,12 +39,12 @@ export interface BattleHistoryEntry {
   winner: string;
   winnerHealth: number;
   winnerSide: string;
-  characters: Array<{
+  characters: {
     name: string;
     powerScore: number;
     side: string;
     weapon: string;
-  }>;
+  }[];
   log: string[];
   duration: number;
 }

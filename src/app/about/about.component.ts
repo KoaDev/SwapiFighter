@@ -159,12 +159,15 @@ export class AboutComponent {
     const damage = Math.floor(selectedAttack.damage * (attacker.powerLevel / 100));
     defender.health -= damage;
 
-    let message = `${attacker.name} utilise ${selectedAttack.name}! et inflige ${damage} dégâts!`;
+    // Utilisation de const au lieu de let
+    const message = `${attacker.name} utilise ${selectedAttack.name}! et inflige ${damage} dégâts!`;
+
     return {
       message,
       specialEffect: selectedAttack.effect ? `→ ${selectedAttack.effect}` : undefined
     };
   }
+
 
   private endBattle(): void {
     this.battleInProgress.set(false);
