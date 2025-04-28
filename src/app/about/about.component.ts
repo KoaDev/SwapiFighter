@@ -1,4 +1,4 @@
-import { Component, signal, OnInit, inject } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BattleService } from '../core/services/battle.service';
 
@@ -21,7 +21,7 @@ interface DevCharacter {
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent {
   private battleService = inject(BattleService);
 
   dev1 = signal<DevCharacter>({
@@ -57,8 +57,6 @@ export class AboutComponent implements OnInit {
   loading = signal(false);
   combatSpeed = signal(1500);
 
-  ngOnInit(): void {}
-
   startBattle(): void {
     this.loading.set(true);
     this.resetBattleState();
@@ -75,7 +73,9 @@ export class AboutComponent implements OnInit {
       this.currentAttacker.set(firstAttacker);
 
       const updatedLog = [...this.battleLog()];
-      updatedLog.push(`${firstAttacker === 'dev1' ? this.dev1().name : this.dev2().name} commence l'attaque !`);
+      updatedLog.push(
+        `${firstAttacker === 'dev1' ? this.dev1().name : this.dev2().name} commence l'attaque !`
+      );
       this.battleLog.set(updatedLog);
 
       // Démarrer le combat
@@ -143,10 +143,10 @@ export class AboutComponent implements OnInit {
     setTimeout(() => this.nextTurn(), this.combatSpeed());
   }
 
-  private performAttack(attacker: DevCharacter, defender: DevCharacter): {
-    message: string;
-    specialEffect?: string
-  } {
+  private performAttack(
+    attacker: DevCharacter,
+    defender: DevCharacter
+  ): { message: string; specialEffect?: string } {
     // Types d'attaques spécifiques aux devs
     const attacks = [
       { name: 'Push de code', damage: 15, effect: 'merge conflict' },
@@ -159,12 +159,10 @@ export class AboutComponent implements OnInit {
     const damage = Math.floor(selectedAttack.damage * (attacker.powerLevel / 100));
     defender.health -= damage;
 
-    let message = `${attacker.name} utilise ${selectedAttack.name}!`;
-    message += ` et inflige ${damage} dégâts!`;
-
+    let message = `${attacker.name} utilise ${selectedAttack.name}! et inflige ${damage} dégâts!`;
     return {
       message,
-      specialEffect: selectedAttack.effect ? ` → ${selectedAttack.effect}` : undefined
+      specialEffect: selectedAttack.effect ? `→ ${selectedAttack.effect}` : undefined
     };
   }
 
@@ -182,7 +180,7 @@ export class AboutComponent implements OnInit {
     this.startBattle();
   }
 
-  closeWinnerModal() {
+  closeWinnerModal(): void {
     this.winner.set(null);
   }
 }

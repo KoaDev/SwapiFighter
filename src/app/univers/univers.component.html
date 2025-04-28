@@ -41,13 +41,13 @@
                 <p>Type: {{ getDisplayType(item.type) }}</p>
                 <!-- Plus de détails selon le type -->
                 @if (item.type === 'character') {
-                  <p>Genre: {{ item.metadata.gender || 'Inconnu' }}</p>
+                  <p>Genre: {{ item.metadata['gender'] || 'Inconnu' }}</p>
                 }
                 @if (item.type === 'planet') {
-                  <p>Climat: {{ item.metadata.climate || 'Inconnu' }}</p>
+                  <p>Climat: {{ item.metadata['climate'] || 'Inconnu' }}</p>
                 }
                 @if (item.type === 'starship') {
-                  <p>Modèle: {{ item.metadata.model || 'Inconnu' }}</p>
+                  <p>Modèle: {{ item.metadata['model'] || 'Inconnu' }}</p>
                 }
               </div>
             }

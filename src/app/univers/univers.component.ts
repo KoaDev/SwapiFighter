@@ -1,5 +1,4 @@
-// univers.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Film } from '../core/models/film';
 import { UniverseItem } from '../core/models/universe-item';
@@ -12,19 +11,19 @@ import { UniverseService } from '../core/services/universe.service';
   templateUrl: './univers.component.html',
   styleUrls: ['./univers.component.css']
 })
-export class UniversComponent {
-  universeData: {film: Film, items: UniverseItem[]}[] = [];
-  filteredData: {film: Film, items: UniverseItem[]}[] = [];
+export class UniversComponent implements OnInit {
+  universeData: { film: Film; items: UniverseItem[] }[] = [];
+  filteredData: { film: Film; items: UniverseItem[] }[] = [];
   loading = true;
   selectedCategory: 'all' | 'characters' | 'planets' | 'starships' = 'all';
 
   constructor(private universeService: UniverseService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadUniverseData();
   }
 
-  loadUniverseData() {
+  loadUniverseData(): void {
     this.universeService.getUniverseByFilms().subscribe({
       next: (data) => {
         this.universeData = data;
@@ -38,12 +37,12 @@ export class UniversComponent {
     });
   }
 
-  filterByCategory(category: 'all' | 'characters' | 'planets' | 'starships') {
+  filterByCategory(category: 'all' | 'characters' | 'planets' | 'starships'): void {
     this.selectedCategory = category;
     this.applyFilter();
   }
 
-  private applyFilter() {
+  private applyFilter(): void {
     if (this.selectedCategory === 'all') {
       this.filteredData = this.universeData.map(group => ({
         film: group.film,
@@ -53,10 +52,10 @@ export class UniversComponent {
     }
 
     // Détermine le type correspondant à la catégorie
-    const typeMap = {
-      'characters': 'character',
-      'planets': 'planet',
-      'starships': 'starship'
+    const typeMap: Record<'characters' | 'planets' | 'starships', UniverseItem['type']> = {
+      characters: 'character',
+      planets:     'planet',
+      starships:   'starship'
     };
     const targetType = typeMap[this.selectedCategory];
 
@@ -66,12 +65,14 @@ export class UniversComponent {
     }));
   }
 
-  // Méthode utilitaire pour obtenir le nom du type affichable
-  getDisplayType(type: string): string {
-    const typeNames: {[key: string]: string} = {
-      'character': 'Personnage',
-      'planet': 'Planète',
-      'starship': 'Vaisseau'
+  /** Retourne le libellé français d’un type d’item */
+  getDisplayType(type: UniverseItem['type']): string {
+    const typeNames: Record<UniverseItem['type'], string> = {
+      character: 'Personnage',
+      planet:    'Planète',
+      starship:  'Vaisseau',
+      vehicle:   'Véhicule',
+      species:   'Espèce'
     };
     return typeNames[type] || type;
   }

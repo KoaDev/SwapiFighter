@@ -1,6 +1,8 @@
+import { Character } from './character';
+
 export interface Attack {
   name: string;
   damage: number;
   description: string;
-  specialEffect?: (arg : any) => string;
+  specialEffect?: (target: Character) => string;
 }

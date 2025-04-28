@@ -1,4 +1,3 @@
-// src/app/core/services/battle.service.ts
 import { Injectable } from '@angular/core';
 import { Attack } from '../models/attack';
 import { Character } from '../models/character';
@@ -38,13 +37,27 @@ export class BattleService {
     }
   ];
 
-  constructor() { }
-
+  /**
+   * Récupère une attaque aléatoire parmi celles définies.
+   */
   getRandomAttack(): Attack {
-    return this.attacks[Math.floor(Math.random() * this.attacks.length)];
+    const idx = Math.floor(Math.random() * this.attacks.length);
+    return this.attacks[idx];
   }
 
-  performAttack(attacker: Character, defender: Character): { damage: number; message: string; specialEffect?: string; attackName: string } {
+  /**
+   * Exécute une attaque d’un personnage sur un autre.
+   * Calcule dégâts, critiques et effets spéciaux.
+   */
+  performAttack(
+    attacker: Character,
+    defender: Character
+  ): {
+    damage: number;
+    message: string;
+    specialEffect?: string;
+    attackName: string;
+  } {
     const attack = this.getRandomAttack();
     const attackName = attack.name;
     const baseDamage = Math.floor(attack.damage * (attacker.powerScore! / 100));
@@ -52,15 +65,16 @@ export class BattleService {
     const damage = criticalHit ? baseDamage * 2 : baseDamage;
 
     let message = `${attacker.name} utilise ${attack.name}`;
-    message += criticalHit ? " (COUP CRITIQUE!)" : "";
+    if (criticalHit) {
+      message += " (COUP CRITIQUE!)";
+    }
     message += ` et inflige ${damage} dégâts!`;
-
-    let specialEffectMessage = "";
 
     // Appliquer les dégâts
     defender.health! -= damage;
 
-    // Effet spécial
+    // Effet spécial éventuel
+    let specialEffectMessage: string | undefined;
     if (attack.specialEffect) {
       const effect = attack.specialEffect(defender);
       if (effect) {
@@ -71,7 +85,14 @@ export class BattleService {
     return { damage, message, specialEffect: specialEffectMessage, attackName };
   }
 
-  checkBattleStatus(character1: Character, character2: Character): { finished: boolean; winner?: Character } {
+  /**
+   * Vérifie si l’un des personnages est à 0 PV ou moins,
+   * et retourne le statut du combat.
+   */
+  checkBattleStatus(
+    character1: Character,
+    character2: Character
+  ): { finished: boolean; winner?: Character } {
     if (character1.health! <= 0) {
       return { finished: true, winner: character2 };
     }

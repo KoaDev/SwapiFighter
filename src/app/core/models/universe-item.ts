@@ -3,5 +3,5 @@ export interface UniverseItem {
   name: string;
   url: string;
   film: string;
-  metadata: any;
+  metadata: Record<string, unknown>;
 }
