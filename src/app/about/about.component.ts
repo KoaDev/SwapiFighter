@@ -27,20 +27,20 @@ export class AboutComponent {
   dev1 = signal<DevCharacter>({
     name: 'Max CHAMPION',
     role: 'Développeur Frontend',
-    skills: ['Angular', 'Animation CSS', 'UX/UI'],
-    weaknesses: ['Café trop fort', 'Documentation'],
+    skills: ['Brodwitch', 'Gambling', 'Café Clope Caca'],
+    weaknesses: ['Gambling', 'Barrière d\'autoroute'],
     powerLevel: 95,
     health: 100,
     avatar: 'assets/img/dev/max.jpeg',
     side: 'light',
-    catchphrase: 'May the code be with you!',
+    catchphrase: '100% des gagnant on joué....',
   });
 
   dev2 = signal<DevCharacter>({
     name: 'Fabio FAYET',
-    role: 'Développeur Backend',
-    skills: ['Node.js', 'API Design', 'Optimisation'],
-    weaknesses: ['Syntax errors', 'Heures tardives'],
+    role: 'Développeur Frontend',
+    skills: ['Mercredeal', 'Bagarre', 'Vomis du lendemain'],
+    weaknesses: ['Les trucs qui font de la fumé', 'Rocher de Magaud'],
     powerLevel: 92,
     health: 100,
     avatar: 'assets/img/dev/fabio.jpeg',
@@ -155,18 +155,13 @@ export class AboutComponent {
   ): { message: string; specialEffect?: string } {
     // Types d'attaques spécifiques aux devs
     const attacks = [
-      { name: 'Push de code', damage: 15, effect: 'merge conflict' },
+      { name: 'Brodwitch', damage: 15, effect: 'Gros caca' },
       {
-        name: 'Revue de code',
-        damage: 20,
-        effect: 'commentaires sarcastiques',
+        name: 'Tout sur le rouge',
+        damage: 25,
+        effect: 'Et non, c\'etait noir (plus d\'argent) !',
       },
-      { name: 'Refactoring', damage: 25, effect: 'code illisible' },
-      {
-        name: 'Déploiement nocturne',
-        damage: 30,
-        effect: 'site en maintenance',
-      },
+      { name: 'Kidnapping', damage: 25, effect: 'Devine qui a pris l\'enfant ...'},
     ];
 
     const selectedAttack = attacks[Math.floor(Math.random() * attacks.length)];

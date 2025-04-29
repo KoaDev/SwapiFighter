@@ -1,20 +1,6 @@
 <div class="battle-container">
   <h1 class="title">Dev Duel: Qui est le meilleur développeur?</h1>
 
-  <button
-    (click)="restartBattle()"
-    [disabled]="battleInProgress()"
-    class="battle-button"
-  >
-    @if (loading()) {
-      Préparation du combat...
-    } @else if (battleInProgress()) {
-      Combat en cours
-    } @else {
-      Commencer le combat
-    }
-  </button>
-
   @if (loading()) {
     <div class="loading-indicator">
       <div class="loader"></div>
@@ -90,9 +76,20 @@
           <p class="catchphrase">"{{ dev1().catchphrase }}"</p>
         </div>
 
-        <div class="vs">
-          <div class="vs-circle">VS</div>
-        </div>
+        <!-- Bouton de combat placé ici, sous le VS -->
+        <button
+          (click)="restartBattle()"
+          [disabled]="battleInProgress()"
+          class="battle-button"
+        >
+          @if (loading()) {
+            Préparation du combat...
+          } @else if (battleInProgress()) {
+            Combat en cours
+          } @else {
+            Commencer le combat
+          }
+        </button>
 
         <!-- Dev 2 -->
         <div
