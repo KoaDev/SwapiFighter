@@ -45,7 +45,7 @@ export class AboutComponent {
     health: 100,
     avatar: 'assets/img/dev/fabio.jpeg',
     side: 'dark',
-    catchphrase: 'I find your lack of tests disturbing!',
+    catchphrase: '10% de judo, 10% de code, pour 100% de vodka',
   });
 
   battleLog = signal<string[]>([]);
