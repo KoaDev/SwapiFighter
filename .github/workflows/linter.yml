@@ -21,6 +21,17 @@ jobs:
       - name: Install Prettier
         run: npm install --save-dev prettier
 
+      - name: Check Angular version
+        id: check-angular
+        run: |
+          ANGULAR_VERSION=$(node -p "require('./package.json').dependencies['@angular/core'] || require('./package.json').devDependencies['@angular/core']")
+          if [[ ! $ANGULAR_VERSION == *"19."* ]]; then
+            echo "::warning::This project is not using Angular 19 (found: $ANGULAR_VERSION)"
+            echo "not_angular_19=true" >> $GLOBALE
+          else
+            echo "::notice::Angular 19 detected ($ANGULAR_VERSION)"
+          fi
+
       - name: Run ESLint
         run: npm run lint
 
